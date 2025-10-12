@@ -1,4 +1,4 @@
-FROM ubuntu:latest
-LABEL authors="Ephraim Gooding"
-
-ENTRYPOINT ["top", "-b"]
+FROM openjdk:latest
+COPY ./target/ReportsApp.jar /tmp
+WORKDIR /tmp
+ENTRYPOINT ["java", "-jar", "ReportsApp.jar"]
