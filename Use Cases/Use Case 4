@@ -1,0 +1,51 @@
+# USE CASE #4: View the top N most populated countries in the world (Country Report)
+
+## CHARACTERISTIC INFORMATION
+**Goal in Context**
+As a Data Analyst, I want to view the top N most populated countries globally so that I can focus my analysis on the largest nations.
+
+**Scope**
+World Population Reporting System
+
+**Level**
+Primary task
+
+**Preconditions**
+* The database (world.sql) is connected and loaded.
+* The user is logged into the system interface (CLI or GUI).
+* A valid integer value (N) is provided by the user.
+
+**Success End Condition**
+The system successfully generates and displays the top N countries in the world sorted by population in descending order.
+
+**Failed End Condition**
+Invalid N value, database query failure, or no data returned.
+
+**Primary Actor**
+Data Analyst
+
+**Trigger**
+The user selects the Country Report then Top N (World) option and enters the desired number of results (N).
+
+## MAIN SUCCESS SCENARIO
+1. The user opens the World Population Reporting System.
+2. The system displays the main dashboard with report options.
+3. The user selects Country Report from the available options.
+4. The system displays a submenu for Report Type (All, Continent, Region, Top N).
+5. The user selects Top N (World).
+6. The system prompts the user to enter an integer value (N) representing the number of countries to display.
+7. The user enters a valid integer (e.g., 10).
+8. The system validates the input and executes a SQL query to retrieve the top N countries ordered by population in descending order.
+9. The system displays the formatted report in the following columns: **Code, Name, Continent, Region, Population, Capital**
+10. The user reviews or exports the report for analysis.
+
+## EXTENSIONS
+* **6a.** User enters an invalid or non-numeric N value; System displays: "Invalid entry. Please enter a numeric value for N."
+* **8a.** Database connection fails, System logs the error and displays: "Unable to retrieve data. Please check database connection."
+* **9a.** No countries found, System displays: "No data available."
+
+## SUB-VARIATIONS
+* The report may be exported in CSV, PDF, or displayed as an on-screen table.
+
+## SCHEDULE
+**Due Date:** Release 1.0
