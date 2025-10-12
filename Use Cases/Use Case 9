@@ -1,0 +1,53 @@
+# USE CASE #9: View all cities in a region by population (City Report)
+
+## CHARACTERISTIC INFORMATION
+**Goal in Context**
+As a Data Analyst, I want to view all cities within a selected region ordered by population so that I can assess regional urbanization and identify the largest population centers in that area.
+
+**Scope**
+World Population Reporting System
+
+**Level**
+Primary task
+
+**Preconditions**
+* The database (world.sql) is connected and loaded.
+* City and country data are properly joined by region relationships.
+* Valid region names exist in the database.
+* The user is logged into the system interface (CLI or GUI).
+
+**Success End Condition**
+The system successfully generates and displays a list of all cities within the specified region ordered from largest to smallest population.
+
+**Failed End Condition**
+Invalid region name, query returns no results, or database connection fails.
+
+**Primary Actor**
+Data Analyst
+
+**Trigger**
+The user selects the City Report then By Region option and enters the desired region name.
+
+## MAIN SUCCESS SCENARIO
+1. The user opens the World Population Reporting System.
+2. The system displays the main dashboard with report options.
+3. The user selects City Report from the available options.
+4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
+5. The user selects by Region.
+6. The system prompts the user to enter a region name (e.g., "Caribbean").
+7. The user provides a valid region name.
+8. The system executes a SQL query joining the city, country, and region data to filter cities belonging to that region.
+9. The system sorts the results by population in descending order.
+10. The system displays the formatted report in the following columns: **Name, Country, District, Population**
+11. The user reviews or exports the report for further analysis.
+
+## EXTENSIONS
+* **6a.** User enters an invalid or misspelled region name; System displays: "Invalid region. Please check the spelling or try again."
+* **8a.** Database connection fails, System logs the error and displays: "Unable to retrieve data. Please check database connection."
+* **9a.** No cities found for the selected region, System displays: "No city data available for this region."
+
+## SUB-VARIATIONS
+* The report may be exported in CSV, PDF, or displayed as an on-screen table.
+
+## SCHEDULE
+**Due Date:** Release 3.0

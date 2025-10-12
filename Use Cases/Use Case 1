@@ -1,0 +1,50 @@
+# USE CASE #1: View all Countries in the world by population (Country Report)
+
+## CHARACTERISTIC INFORMATION
+**Goal in Context**
+As a Data Analyst, I want to view all countries sorted from largest to smallest population so that I can easily identify the most populous nations.
+
+**Scope**
+World Population Reporting System
+
+**Level**
+Primary task
+
+**Preconditions**
+* The database (world.sql) is connected and loaded.
+* The user is logged into the system interface (CLI or GUI).
+* Country data (code, name, continent, region, population, capital) is present in the database.
+
+**Success End Condition**
+The system successfully generates and displays a complete list of all countries in the world ordered from largest to smallest population.
+
+**Failed End Condition**
+Database connection fails, query returns no results, or data cannot be displayed
+
+**Primary Actor**
+Data Analyst
+
+**Trigger**
+The User selects the Country Report then All Countries from the system dashboard
+
+## MAIN SUCCESS SCENARIO
+1. The user opens the World Population Reporting System.
+2. The system displays the main dashboard with report options.
+3. The user selects Country Report from the available options.
+4. The system displays a submenu for Report Type (All, Continent, Region, Top N).
+5. The user selects All Countries.
+6. The system executes a SQL query to retrieve all countries from the database.
+7. The system sorts the list of countries in descending order by population.
+8. The system displays the formatted report in the following columns: **Code, Name, Continent, Region, Population, Capital**
+9. The user reviews the report or exports it for further analysis
+
+## EXTENSIONS
+* **6a.** Database connection fails, System logs the error and displays: "Unable to retrieve data. Please check database connection."
+* **7a.** Query returns no results; System displays: "No country data available."
+* **8a.** Data load or rendering error, System displays: "Unable to display results. Please retry."
+
+## SUB-VARIATIONS
+* The report may be exported in CSV, PDF, or displayed as an on-screen table.
+
+## SCHEDULE
+**Due Date:** Release 1.0
