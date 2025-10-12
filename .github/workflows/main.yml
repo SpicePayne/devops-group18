@@ -3,7 +3,7 @@ on: push
 
 jobs:
   build:
-    name: Hello world action
+    name: IntelliJ Commit
     runs-on: ubuntu:latest
     steps:
       - name: Checkout
