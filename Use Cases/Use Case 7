@@ -1,0 +1,50 @@
+# USE CASE #7: View all cities in the world by population (City Report)
+
+## CHARACTERISTIC INFORMATION
+**Goal in Context**
+As a Data Analyst, I want to view all cities in the world sorted from largest to smallest population so that I can identify and analyze major global urban centers.
+
+**Scope**
+World Population Reporting System
+
+**Level**
+Primary task
+
+**Preconditions**
+* The database (world.sql) is connected and loaded.
+* City data is properly linked to country data.
+* The user is logged into the system interface (CLI or GUI).
+
+**Success End Condition**
+The system successfully generates and displays a list of all cities in the world ordered from largest to smallest population.
+
+**Failed End Condition**
+Database connection fails, data query fails, or no city records are returned.
+
+**Primary Actor**
+Data Analyst
+
+**Trigger**
+The user selects the City Report then All Cities option from the system dashboard.
+
+## MAIN SUCCESS SCENARIO
+1. The user opens the World Population Reporting System.
+2. The system displays the main dashboard with available report types.
+3. The user selects City Report from the dashboard options.
+4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
+5. The user selects All Cities.
+6. The system executes a SQL query to retrieve all cities from the database.
+7. The system sorts the results by population in descending order.
+8. The system displays the formatted report in the following columns: **Name, Country, District, Population**
+9. The user reviews or exports the report for further analysis.
+
+## EXTENSIONS
+* **6a.** Database connection fails, System logs the error and displays: "Unable to connect to database. Please check your connection and try again."
+* **7a.** Query returns no results; System displays: "No city data available."
+* **8a.** Data display or rendering error, System displays: "Unable to display results. Please retry."
+
+## SUB-VARIATIONS
+* The report may be exported in CSV, PDF, or displayed as an on-screen table.
+
+## SCHEDULE
+**Due Date:** Release 3.0
