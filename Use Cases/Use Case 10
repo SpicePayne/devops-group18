@@ -1,0 +1,53 @@
+# USE CASE #10: View all cities in a country by population (City Report)
+
+## CHARACTERISTIC INFORMATION
+**Goal in Context**
+As a Data Analyst, I want to view all cities within a selected country ordered by population so that I can analyze urban population distribution and identify the major population centers in that country.
+
+**Scope**
+World Population Reporting System
+
+**Level**
+Primary task
+
+**Preconditions**
+* The database (world.sql) is connected and loaded.
+* Valid country names exist in the database.
+* City data is linked correctly to each country.
+* The user is logged into the system interface (CLI or GUI).
+
+**Success End Condition**
+The system successfully generates and displays a list of all cities within the specified country, ordered from largest to smallest population.
+
+**Failed End Condition**
+Invalid country name entered, query returns no results, or database connection fails.
+
+**Primary Actor**
+Data Analyst
+
+**Trigger**
+The user selects the City Report then By Country option and enters the desired country name.
+
+## MAIN SUCCESS SCENARIO
+1. The user opens the World Population Reporting System.
+2. The system displays the main dashboard with available report options.
+3. The user selects City Report from the options.
+4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
+5. The user selects by Country.
+6. The system prompts the user to enter a country name (e.g., "Japan").
+7. The user provides a valid country name.
+8. The system executes a SQL query joining the city and country tables to retrieve all cities within the specified country.
+9. The system sorts the resulting cities by population in descending order.
+10. The system displays the formatted report in the following columns: **City Name, District, Population, Country Code**
+11. The user reviews or exports the report for analysis or presentation.
+
+## EXTENSIONS
+* **6a.** User enters an invalid or misspelled country name; System displays: "Invalid country name. Please try again."
+* **8a.** Database connection fails, System logs the error and displays: "Unable to connect to the database. Please check configuration."
+* **9a.** No cities found for the selected country, System displays: "No city data available for this country."
+
+## SUB-VARIATIONS
+* The report can be exported in CSV, PDF, or displayed as an on-screen table.
+
+## SCHEDULE
+**Due Date:** Release 3.0
