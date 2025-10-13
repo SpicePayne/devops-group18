@@ -9,8 +9,9 @@ Team: Group18
 To create a consistent, transparent, and respectful communication culture that supports collaboration, accountability, and effective Scrum practices across the team.
 
 *Team Members; Five (5) Active Members:*
-Role:	Member(s):	Telephone:	Work Email:	Personal Email:
-Product Owner:	Shealsha Payne	(664) 393-9350	40689622@live.napier.ac.uk  spicepayne@gmail.com 
+
+### Product Owner:
+Shealsha Payne	(664) 393-9350	40689622@live.napier.ac.uk  spicepayne@gmail.com 
 
 ### Scrum Master:
 Andrew Carey	(242) 454-8624	40803078@live.napier.ac.uk  andrewcarey654@gmail.com
@@ -27,7 +28,7 @@ Andrew Carey	and Shealsha Payne
 
 DevOps:	All Active Members
 
-## 1. Team Communication
+## 1. Team Communication—
 •	WhatsApp, Teams, Outlook, GitHub & Zube; used for daily coordination and quick updates.
 •	Email used for formal communications and documentation.
 •	Please use WhatsApp to follow up on emails sent.
