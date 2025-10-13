@@ -10,20 +10,20 @@ To create a consistent, transparent, and respectful communication culture that s
 
 *Team Members; Five (5) Active Members:*
 
-### Product Owner:
+***Product Owner:***
 Shealsha Payne	(664) 393-9350	40689622@live.napier.ac.uk  spicepayne@gmail.com 
 
-### Scrum Master:
+***Scrum Master:***
 Andrew Carey	(242) 454-8624	40803078@live.napier.ac.uk  andrewcarey654@gmail.com
 
-### Developers:
+***Developers:***
 Godwin Allert	(473) 405-6286	40742542@live.napier.ac.uk  allertgodwin@gmail.com
 
 Zanica Francis	(784) 497-7165	40797981@live.napier.ac.uk  zanica3.0@hotmail.com
 
 Ephraim Gooding	(473) 422-1032	40791863@live.napier.ac.uk  subscription@egooding.com
 
-### Testers:	
+***Testers:***	
 Andrew Carey	and Shealsha Payne
 
 DevOps:	All Active Members
