@@ -1,0 +1,58 @@
+# USE CASE #13: View top N populated cities in a continent (City Report)
+
+## CHARACTERISTIC INFORMATION
+**Goal in Context**
+As a Data Analyst, I want to view the top N populated cities within a specific continent so that I can compare major cities across different continents and analyze regional urban growth patterns.
+
+**Scope**
+World Population Reporting System
+
+**Level**
+Primary task
+
+**Preconditions**
+* The database (world.sql) is connected and loaded.
+* Valid continent names exist in the database.
+* The user is logged into the system interface (CLI or GUI).
+* City and country data are correctly linked.
+* The user understands that "N" represents the number of top cities to retrieve.
+
+**Success End Condition**
+The system successfully generates and displays a list of the top N cities in the specified continent, ordered from largest to smallest population.
+
+**Failed End Condition**
+Invalid continent name, invalid value for N, or database connection/query failure prevents report generation.
+
+**Primary Actor**
+Data Analyst
+
+**Trigger**
+The user selects the City Report then Top N (By Continent) option and enters both the continent name and the desired N value.
+
+## MAIN SUCCESS SCENARIO
+1. The user opens the World Population Reporting System.
+2. The system displays the main dashboard with report categories.
+3. The user selects City Report.
+4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
+5. The user selects Top N (By Continent).
+6. The system prompts the user to enter the continent name (e.g., "Asia").
+7. The user enters a valid continent name.
+8. The system then prompts the user to enter a numeric value for N (e.g., "10").
+9. The user enters a valid integer for N.
+10. The system executes a SQL query joining city and country tables to filter cities belonging to the specified continent and limits the result to the top N by population.
+11. The system sorts results in descending order by population.
+12. The system displays the report in the following columns: **City Name, Country Name, Continent, District, Population**
+13. The user reviews or exports the report as needed.
+
+## EXTENSIONS
+* **6a.** User enters an invalid or misspelled continent name, System displays: "Invalid continent name. Please try again."
+* **8a.** User enters a non-numeric or invalid N value; System displays: "Please enter a valid number for N."
+* **10a.** Database query fails, System logs the error and displays: "Unable to retrieve data. Check database connection."
+* **11a.** No results found, System displays: "No city data available for the specified continent."
+
+## SUB-VARIATIONS
+* The report can be exported in CSV or PDF format, or displayed as an on-screen table.
+* The user may optionally include country codes in the results.
+
+## SCHEDULE
+**Due Date:** Release 4.0
