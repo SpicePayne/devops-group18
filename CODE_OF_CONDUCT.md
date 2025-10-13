@@ -1,5 +1,4 @@
 # Code of Conduct
-
 ### Team Communication & Collaboration Charter Framework
 
 Prepared by: Andrew Carey (Scrum Master)
