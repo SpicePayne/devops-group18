@@ -24,9 +24,12 @@ Zanica Francis	(784) 497-7165	40797981@live.napier.ac.uk  zanica3.0@hotmail.com
 Ephraim Gooding	(473) 422-1032	40791863@live.napier.ac.uk  subscription@egooding.com
 
 ***Testers:***	
-Andrew Carey	and Shealsha Payne
 
-DevOps:	All Active Members
+Andrew Carey and Shealsha Payne
+
+***DevOps:***	
+
+All Active Members
 
 ## 1. Team Communication—
 •	WhatsApp, Teams, Outlook, GitHub & Zube; used for daily coordination and quick updates.
