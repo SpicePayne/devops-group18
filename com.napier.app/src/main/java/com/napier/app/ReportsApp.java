@@ -1,4 +1,4 @@
-package main.java.com.napier.app;
+package com.napier.app;
 
 import java.sql.*;
 
@@ -28,7 +28,7 @@ public class ReportsApp
                 // Wait a bit for db to start
                 Thread.sleep(1000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world", "root", "password");
                 System.out.println("Successfully connected");
                 // Wait a bit
                 Thread.sleep(1000);

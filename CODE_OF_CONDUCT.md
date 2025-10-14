@@ -40,7 +40,6 @@ To create a consistent, transparent, and respectful communication culture that s
 | QA Tester |Shealsha Payne|(664) 393-9350  |40689622@live.napier.ac.uk | spicepayne@gmail.com      |
 | QA Tester |Ephraim Gooding|(473) 422-1032| 40791863@live.napier.ac.uk | subscription@egooding.com |
 
-Andrew Carey and Shealsha Payne
 
 ***DevOps:***	
 
@@ -48,7 +47,6 @@ All Active Members
 
 ## 1. Team Communication—
 
-## 1. Team Communication
 * WhatsApp, Teams, Outlook, GitHub & Zube; used for daily coordination and quick updates.
 * Email used for formal communications and documentation.
 * Please use WhatsApp to follow up on emails sent.
