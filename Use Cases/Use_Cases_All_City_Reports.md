@@ -2,7 +2,7 @@
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all cities in the world sorted from largest to smallest population so that I can identify and analyze major global urban centers.
+As a Data Analyst, I want to view all cities in the world sorted from largest to smallest population so that I can identify and analyze major global urban centers for the organization.
 
 **Scope**
 World Population Reporting System
@@ -55,7 +55,7 @@ The user selects the City Report then All Cities option from the system dashboar
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all cities within a selected continent sorted by population so that I can analyze urbanization patterns and identify major cities across that continent.
+As a Data Analyst, I want to view all cities within a selected continent sorted by population so that I can analyze urbanization patterns and identify major cities across that continent for the organization.
 
 **Scope**
 World Population Reporting System
@@ -111,7 +111,7 @@ The user selects the City Report then By Continent option and enters the desired
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all cities within a selected region ordered by population so that I can assess regional urbanization and identify the largest population centers in that area.
+As a Data Analyst, I want to view all cities within a selected region ordered by population so that I can assess regional urbanization and identify the largest population centers in that area for the organization.
 
 **Scope**
 World Population Reporting System
@@ -167,7 +167,7 @@ The user selects the City Report then By Region option and enters the desired re
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all cities within a selected country ordered by population so that I can analyze urban population distribution and identify the major population centers in that country.
+As a Data Analyst, I want to view all cities within a selected country ordered by population so that I can analyze urban population distribution and identify the major population centers in that country for the organization.
 
 **Scope**
 World Population Reporting System
@@ -223,7 +223,7 @@ The user selects the City Report then By Country option and enters the desired c
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all cities within a selected district ordered by population so that I can analyze local population trends and identify the most populated cities within that district.
+As a Data Analyst, I want to view all cities within a selected district ordered by population so that I can analyze local population trends and identify the most populated cities within that district for the organization.
 
 **Scope**
 World Population Reporting System
@@ -279,7 +279,7 @@ The user selects the City Report then By District option and enters the desired 
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N most populated cities worldwide so that I can identify the largest global cities and analyze global urbanization trends.
+As a Data Analyst, I want to view the top N most populated cities worldwide so that I can identify the largest global cities and analyze global urbanization trends for the organization.
 
 **Scope**
 World Population Reporting System
@@ -334,7 +334,7 @@ The user selects the City Report then Top N (World) option and enters a numeric 
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N populated cities within a specific continent so that I can compare major cities across different continents and analyze regional urban growth patterns.
+As a Data Analyst, I want to view the top N populated cities within a specific continent so that I can compare major cities across different continents and analyze regional urban growth patterns for the organization.
 
 **Scope**
 World Population Reporting System
@@ -371,7 +371,7 @@ The user selects the City Report then Top N (By Continent) option and enters bot
 7. The user enters a valid continent name.
 8. The system then prompts the user to enter a numeric value for N (e.g., "10").
 9. The user enters a valid integer for N.
-10. The system executes a SQL query joining city and country tables to filter cities belonging to the specified continent and limits the result to the top N by population.
+10. The system executes a SQL query joining city and country tables to filter cities belonging to the specified continent and limits the result to the top N by population for the organization.
 11. The system sorts results in descending order by population.
 12. The system displays the report in the following columns: **City Name, Country Name, Continent, District, Population**
 13. The user reviews or exports the report as needed.
@@ -395,7 +395,7 @@ The user selects the City Report then Top N (By Continent) option and enters bot
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N populated cities within a specific region so that I can identify major regional hubs and compare patterns of urban concentration across regions.
+As a Data Analyst, I want to view the top N populated cities within a specific region so that I can identify major regional hubs and compare patterns of urban concentration across regions for the organization.
 
 **Scope**
 World Population Reporting System
@@ -456,7 +456,7 @@ The user selects the City Report then Top N (By Region) option and provides both
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N most populated cities within a specific country so that I can identify key national urban centers and analyze how population is distributed within that country.
+As a Data Analyst, I want to view the top N most populated cities within a specific country so that I can identify key national urban centers and analyze how population is distributed within that country for the organization.
 
 **Scope**
 World Population Reporting System
@@ -517,7 +517,7 @@ The user selects the City Report then Top N (by Country) option and enters both 
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N most populated cities within a specific district so that I can analyze small-scale urban population distribution and identify key urban centers at the district level.
+As a Data Analyst, I want to view the top N most populated cities within a specific district so that I can analyze small-scale urban population distribution and identify key urban centers at the district level for the organization.
 
 **Scope**
 World Population Reporting System

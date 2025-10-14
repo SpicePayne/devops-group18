@@ -2,7 +2,7 @@
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view how many people speak specific languages (Chinese, English, Hindi, Spanish, Arabic) and what percentage of the world population they represent so that I can understand global language distribution and present comparative statistics.
+As a Data Analyst, I want to view how many people speak specific languages (Chinese, English, Hindi, Spanish, Arabic) and what percentage of the world population they represent so that I can understand global language distribution and present comparative statistics for the organization.
 
 **Scope**
 World Population Reporting System
