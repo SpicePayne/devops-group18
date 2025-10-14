@@ -1,4 +1,4 @@
-# DevOps Group18 - Population Information System
+##DevOps Group18 - Population Information System
 
 A DevOps-based project developed for SET08803 (Software Engineering Methods).
 
@@ -10,14 +10,22 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 - Set up a CI/CD pipeline to automatically build and test the project.
 
 ## Team Members
-| Name           | Role                           | GitHub Username |Score|
-|--------------- |------------------------------- |-----------------|----|
-| Shealsha Payne | Product Owner, Tester & DevOps | @SpicePayne     | 20 |
-| Andrew Carey   | Scrum Master, Tester & DevOps  | @AndrewCarey1   | 20 |
-| Godwin Allert  | Developer & DevOps             | @allertg       | 20 |
-| Zanica Francis | Developer & DevOps             | @zanica L      | 20 |
-| Ephraim Gooding| Developer, Tester & DevOps     | @ephygood      | 20 |
+| Name           | Role                           | GitHub Username |
+|--------------- |------------------------------- |-----------------|
+| Shealsha Payne | Product Owner, Tester & DevOps | @SpicePayne     |
+| Andrew Carey   | Scrum Master, Tester & DevOps  | @AndrewCarey1   |
+| Godwin Allert  | Developer & DevOps             | @allertg       | 
+| Zanica Francis | Developer & DevOps             | @zanica        | 
+| Ephraim Gooding| Developer, Tester & DevOps     | @ephygood      | 
 
+## Individual Assessment
+| Matriculation Number         |Code Review 1| Code Review 2|
+|------------------------------|-------------|--------------|
+|  40689622                    |     20      |              | 
+|  40803078                    |     20      |              |
+|  40742542                    |     20      |              |
+|  40797981                    |     20      |              |
+|  40791863                    |     20      |              |
 
 ## Badges
 
