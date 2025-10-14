@@ -1,4 +1,4 @@
-# DevOps - Group 18 Coursework
+# DevOps - Group 18 Population Compilation
 
 
 ## Badges
