@@ -71,8 +71,8 @@ Response Times:
 
 ## 3. Conflict Resolution Process—
 * Step 1: Direct discussion between involved parties (within 24-48 hours).
-* Step 2: If unresolved, escalate to [Scrum Master](#Scrum Master:) for facilitation.
-* Step 3: If still unresolved, escalate to [Product Owner](#Product Owner:) for facilitation.
+* Step 2: If unresolved, escalate to [Scrum Master](#scrum-master) for facilitation.
+* Step 3: If still unresolved, escalate to [Product Owner](#product-owner) for facilitation.
 * Step 4: Record insights and process improvements in the next retrospective.
 
 ## 4. Review & Agreement—
