@@ -211,7 +211,7 @@ The user selects the Country Report then Top N (World) option and enters the des
 * The report may be exported in CSV, PDF, or displayed as an on-screen table.
 
 ## SCHEDULE
-**Due Date:** Release 1.0
+**Due Date:** Release 2.0
 
 ---
 
@@ -268,7 +268,7 @@ The user selects the Country Report then Top N (Continent) option and enters the
 * The report may be exported in CSV, PDF, or displayed as an on-screen table.
 
 ## SCHEDULE
-**Due Date:** Release 1.0
+**Due Date:** Release 2.0
 
 ---
 
@@ -325,4 +325,4 @@ The user selects the Country Report then Top N (Region) option and enters the de
 * The report may be exported in CSV, PDF, or displayed as an on-screen table.
 
 ## SCHEDULE
-**Due Date:** Release 1.0
+**Due Date:** Release 2.0
