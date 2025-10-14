@@ -71,4 +71,9 @@ Action Steps:
 
 ## Team Acknowledgment—
 We acknowledge our understanding and commitment to uphold this charter.
+
+![GitHub Badge](https://img.shields.io/badge/GitHub-%40AndrewCarey1-blue)
+![GitHub Badge](https://img.shields.io/badge/GitHub-%40SpicePayne-blue)
+![GitHub Badge](https://img.shields.io/badge/GitHub-%40allertg-blue)
+![GitHub Badge](https://img.shields.io/badge/GitHub-%40zanica-blue)
 ![GitHub Badge](https://img.shields.io/badge/GitHub-%40ephygood-blue)
