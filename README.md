@@ -1,4 +1,4 @@
-# DevOps - Group 18 Population Compilation
+# DevOps - Group 18 Population Information System
 
 
 ## Badges
