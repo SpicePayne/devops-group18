@@ -1,4 +1,4 @@
-##DevOps Group18 - Population Information System
+## DevOps Group18 - Population Information System
 
 A DevOps-based project developed for SET08803 (Software Engineering Methods).
 
