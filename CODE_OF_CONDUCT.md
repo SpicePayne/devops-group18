@@ -2,7 +2,9 @@
 ### Team Communication & Collaboration Charter Framework
 
 Prepared by: Andrew Carey (Scrum Master)
+
 Date: October 11, 2025
+
 Team: Group18
 
 ## Purpose—
@@ -38,7 +40,13 @@ To create a consistent, transparent, and respectful communication culture that s
 | QA Tester |Shealsha Payne|(664) 393-9350  |40689622@live.napier.ac.uk | spicepayne@gmail.com      |
 | QA Tester |Ephraim Gooding|(473) 422-1032| 40791863@live.napier.ac.uk | subscription@egooding.com |
 
-DevOps:	All Active Members
+Andrew Carey and Shealsha Payne
+
+***DevOps:***	
+
+All Active Members
+
+## 1. Team Communication—
 
 ## 1. Team Communication
 * WhatsApp, Teams, Outlook, GitHub & Zube; used for daily coordination and quick updates.
@@ -53,7 +61,9 @@ Expectations:
 * Keep messages clear and concise.
 * Maintain professionalism and respect in all exchanges.
 
+
 ## 2. Meeting Etiquette & Response Time Expectations—
+
 Meeting Times:
 * Will convene every Monday & Thursday at 7:00 - 9:00 PM.
 * Other important meetings are TBA.
@@ -69,11 +79,13 @@ Response Times:
 * Urgent messages (acknowledged by stating its urgency in the subject) sent on either channel: respond or acknowledge immediately.
 * Respond or acknowledge by simply saying, “Received” or “Noted”
 
+
 ## 3. Conflict Resolution Process—
 * Step 1: Direct discussion between involved parties (within 24-48 hours).
 * Step 2: If unresolved, escalate to [Scrum Master](#scrum-master) for facilitation.
 * Step 3: If still unresolved, escalate to [Product Owner](#product-owner) for facilitation.
 * Step 4: Record insights and process improvements in the next retrospective.
+
 
 ## 4. Review & Agreement—
 * All team members are required to review and confirm agreement with these guidelines. 
@@ -82,7 +94,9 @@ Action Steps:
 * Share document to work email and WhatsApp for team approval.
 * Final version to be stored on the shared team workspace (GitHub).
 
+
 ## Team Acknowledgment—
+
 We acknowledge our understanding and commitment to uphold this charter.
 
 ![GitHub Badge](https://img.shields.io/badge/Signed-%40AndrewCarey1-green)
