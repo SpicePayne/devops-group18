@@ -28,7 +28,7 @@ public class ReportsApp
                 // Wait timer for mysql database initialize
                 Thread.sleep(1000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world", "root", "password");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "password");
                 System.out.println("Successfully connected");
                 // Hold timer for init
                 Thread.sleep(1000);
