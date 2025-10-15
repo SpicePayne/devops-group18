@@ -2,7 +2,7 @@
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the total population, number of people living in cities, and number of people not living in cities per continent so that I can analyze and compare urbanization levels across continents.
+As a Data Analyst, I want to view the total population, number of people living in cities, and number of people not living in cities per continent so that I can analyze and compare urbanization levels across continents for the organization.
 
 **Scope**
 World Population Reporting System
@@ -61,7 +61,7 @@ The user selects Population Report then by Continent from the dashboard.
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the total population, number of people living in cities, and number of people not living in cities per region so that I can analyze and compare regional differences in population distribution and urbanization.
+As a Data Analyst, I want to view the total population, number of people living in cities, and number of people not living in cities per region so that I can analyze and compare regional differences in population distribution and urbanization for the organization.
 
 **Scope**
 World Population Reporting System
@@ -121,7 +121,7 @@ The user selects Population Report then by Region from the main dashboard.
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the total population, number of people living in cities, and number of people not living in cities per country so that I can measure and compare levels of urbanization across different nations.
+As a Data Analyst, I want to view the total population, number of people living in cities, and number of people not living in cities per country so that I can measure and compare levels of urbanization across different nations for the organization.
 
 **Scope**
 World Population Reporting System
@@ -180,7 +180,7 @@ The user selects Population Report then by Country from the main dashboard.
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the total population of the world so that I can use it as a reference point for analyzing other demographic statistics and percentages.
+As a Data Analyst, I want to view the total population of the world so that I can use it as a reference point for analyzing other demographic statistics and percentages for the organization.
 
 **Scope**
 World Population Reporting System
@@ -233,7 +233,7 @@ The user selects Overall Population Summary then World Population from the dashb
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the total population for a specific continent so that I can compare population sizes across continents and analyze demographic trends.
+As a Data Analyst, I want to view the total population for a specific continent so that I can compare population sizes across continents and analyze demographic trends for the organization.
 
 **Scope**
 World Population Reporting System
@@ -290,7 +290,7 @@ The user selects Overall Population Summary then by Continent and provides the n
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the total population of a specific region so that I can study regional population sizes and compare demographic data across different parts of the world.
+As a Data Analyst, I want to view the total population of a specific region so that I can study regional population sizes and compare demographic data across different parts of the world for the organization.
 
 **Scope**
 World Population Reporting System
@@ -347,7 +347,7 @@ The user selects Overall Population Summary then by Region and enters the name o
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the total population for a specific country so that I can confirm national demographic data and use it as a basis for further analysis or reporting.
+As a Data Analyst, I want to view the total population for a specific country so that I can confirm national demographic data and use it as a basis for further analysis or reporting for the organization.
 
 **Scope**
 World Population Reporting System
@@ -403,7 +403,7 @@ The user selects Overall Population Summary then by Country and enters the name 
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the total population of a specific district so that I can assess and compare demographic distribution within a country.
+As a Data Analyst, I want to view the total population of a specific district so that I can assess and compare demographic distribution within a country for the organization.
 
 **Scope**
 World Population Reporting System
@@ -459,7 +459,7 @@ The user selects Overall Population Summary then by District and enters the desi
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the population of a specific city so that I can analyze urban population distribution within a country or region.
+As a Data Analyst, I want to view the population of a specific city so that I can analyze urban population distribution within a country or region for the organization.
 
 **Scope**
 World Population Reporting System
