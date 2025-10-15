@@ -1,69 +1,36 @@
+# ReportsApp Workflow
+
 name: CI-ReportsApp
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "develop" ]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
   build:
     name: Build and Start Using docker-compose
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
       - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
           java-version: '25'
-          distribution: 'temurin'
-
-      - name: Run Maven tests (capture failures)
-        # run tests and continue so we can collect reports even if tests fail
+          distribution: 'adopt'   
+      - name: Package and Run docker compose
         run: |
-          mvn --batch-mode test
-        continue-on-error: true
-
-      - name: Print surefire/plain text test reports (if any)
-        run: |
-          if [ -d target/surefire-reports ]; then
-            echo "==== Listing surefire reports ===="
-            ls -la target/surefire-reports || true
-            for f in target/surefire-reports/*; do
-              echo "---- $f ----"
-              sed -n '1,400p' "$f" || true
-            done
-          else
-            echo "No surefire-reports directory found"
-          fi
-
-      - name: Package (skip tests since already run)
-        run: mvn --batch-mode package -DskipTests
-
-      - name: Ensure docker / docker compose available
-        run: |
-          docker --version
-          # Check for the modern plugin-style `docker compose`; if missing, install docker-compose
-          if ! docker compose version > /dev/null 2>&1; then
-            echo "docker compose not found, installing docker-compose..."
-            sudo apt-get update -y
-            sudo apt-get install -y docker-compose
-          fi
-          docker compose version
-
-      - name: Build and start services with docker compose
-        run: |
-          docker compose up --build --abort-on-container-exit
-        # continue so we can always gather logs/artifacts even if compose exits non-zero
-        continue-on-error: true
-
-      - name: Dump docker-compose status and logs (save to file)
-        run: |
-          echo "==== docker compose ps ===="
-          docker compose ps || true
-          echo "==== dumping logs to compose-logs.txt ===="
-          docker compose logs --no-color --tail=1000 > compose-logs.txt || true
-          echo "==== individual docker ps (running containers) ===="
-          docker ps --format "table {{.Names}}\t{{.Image}}
+          mvn package -DskipTests
+          docker compose up --abort-on-container-exit
+      - name: view logs
+        run: docker logs devops-group18-app-1
