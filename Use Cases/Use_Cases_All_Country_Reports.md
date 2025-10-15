@@ -2,7 +2,7 @@
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all countries sorted from largest to smallest population so that I can easily identify the most populous nations for the organization.
+As a Data Analyst, I want to view all countries sorted from largest to smallest population so that I can easily identify the most populous nations.
 
 **Scope**
 World Population Reporting System
@@ -55,7 +55,7 @@ The User selects the Country Report then All Countries from the system dashboard
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to list all countries within a selected continent ordered by population so that I can compare population distribution per continent for the organization.
+As a Data Analyst, I want to list all countries within a selected continent ordered by population so that I can compare population distribution per continent.
 
 **Scope**
 World Population Reporting System
@@ -110,7 +110,7 @@ The user selects the Country Report then By Continent option and enters the desi
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to list all countries within a selected region ordered by population so that I can analyze and compare regional population trends for the organization.
+As a Data Analyst, I want to list all countries within a selected region ordered by population so that I can analyze and compare regional population trends.
 
 **Scope**
 World Population Reporting System
@@ -165,7 +165,7 @@ The user selects the Country Report then By Region option and enters the desired
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N most populated countries globally so that I can focus my analysis on the largest nations for the organization.
+As a Data Analyst, I want to view the top N most populated countries globally so that I can focus my analysis on the largest nations.
 
 **Scope**
 World Population Reporting System
@@ -219,7 +219,7 @@ The user selects the Country Report then Top N (World) option and enters the des
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to see the top N most populated countries within a continent so that I can identify and compare the key countries contributing most to the continent's total population for the organization.
+As a Data Analyst, I want to see the top N most populated countries within a continent so that I can identify and compare the key countries contributing most to the continent's total population.
 
 **Scope**
 World Population Reporting System
@@ -276,7 +276,7 @@ The user selects the Country Report then Top N (Continent) option and enters the
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to see the top N most populated countries within a region so that I can analyze regional population distribution and identify dominant nations within that region for the organization.
+As a Data Analyst, I want to see the top N most populated countries within a region so that I can analyze regional population distribution and identify dominant nations within that region.
 
 **Scope**
 World Population Reporting System
@@ -324,7 +324,5 @@ The user selects the Country Report then Top N (Region) option and enters the de
 ## SUB-VARIATIONS
 * The report may be exported in CSV, PDF, or displayed as an on-screen table.
 
-## SCHEDULE
-**Due Date:** Release 2.0
 ## SCHEDULE
 **Due Date:** Release 2.0

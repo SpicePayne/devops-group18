@@ -1,4 +1,4 @@
-package main.java.com.napier.app;
+package com.napier.app;
 
 import java.sql.*;
 
@@ -17,7 +17,7 @@ public class ReportsApp
             System.exit(-1);
         }
 
-        // Connection to the database
+        // Connect to the database
         Connection con = null;
         int retries = 100;
         for (int i = 0; i < retries; ++i)
@@ -25,14 +25,14 @@ public class ReportsApp
             System.out.println("Connecting to database...");
             try
             {
-                // Wait a bit for db to start
+                // Wait timer for mysql database initialize
                 Thread.sleep(1000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "password");
                 System.out.println("Successfully connected");
-                // Wait a bit
+                // Hold timer for init
                 Thread.sleep(1000);
-                // Exit for loop
+                // Exit loop process
                 break;
             }
             catch (SQLException sqle)
