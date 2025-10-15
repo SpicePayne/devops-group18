@@ -36,8 +36,8 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
-![GitHub Workflow Status (Master)](https://img.shields.io/github/workflow/status/SpicePayne/devops-group18/CI-ReportsApp/master?style=flat-square)
+![Master Build Status](https://img.shields.io/github/workflow/status/SpicePayne/devops-group18/main/master?style=flat-square)
 
-![GitHub Workflow Status (Develop)](https://img.shields.io/github/workflow/status/SpicePayne/devops-group18/CI-ReportsApp/develop?style=flat-square)
+![Develope Build Status](https://img.shields.io/github/workflow/status/SpicePayne/devops-group18/main/develop?style=flat-square)
 
 [![Releases](https://img.shields.io/github/release/SpicePayne/devops/all.svg?style=flat-square)](https://github.com/SpicePayne/devops/releases)
