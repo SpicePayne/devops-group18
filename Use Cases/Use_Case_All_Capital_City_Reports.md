@@ -2,7 +2,7 @@
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all capital cities in the world ordered by population so that I can identify the largest global capitals and analyze how populations are distributed among them.
+As a Data Analyst, I want to view all capital cities in the world ordered by population so that I can identify the largest global capitals and analyze how populations are distributed among them for the organization.
 
 **Scope**
 World Population Reporting System
@@ -57,7 +57,7 @@ The user selects the Capital City Report then All (World) option from the main d
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all capital cities within a selected continent ordered by population so that I can compare and analyze capitals across different continents.
+As a Data Analyst, I want to view all capital cities within a selected continent ordered by population so that I can compare and analyze capitals across different continents for the organization.
 
 **Scope**
 World Population Reporting System
@@ -115,7 +115,7 @@ The user selects the Capital City Report then by Continent option and provides a
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view all capital cities within a specific region ordered by population so that I can identify and analyze major administrative centers within that region.
+As a Data Analyst, I want to view all capital cities within a specific region ordered by population so that I can identify and analyze major administrative centers within that region for the organization.
 
 **Scope**
 World Population Reporting System
@@ -173,7 +173,7 @@ The user selects Capital City Report then by Region from the dashboard and input
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N most populated capital cities in the world so that I can easily identify and compare the largest global administrative centers.
+As a Data Analyst, I want to view the top N most populated capital cities in the world so that I can easily identify and compare the largest global administrative centers for the organization.
 
 **Scope**
 World Population Reporting System
@@ -230,7 +230,7 @@ The user selects Capital City Report then Top N (World) and enters a numeric val
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N most populated capital cities within a selected continent so that I can compare the largest administrative centers across that continent.
+As a Data Analyst, I want to view the top N most populated capital cities within a selected continent so that I can compare the largest administrative centers across that continent for the organization.
 
 **Scope**
 World Population Reporting System
@@ -291,7 +291,7 @@ The user selects Capital City Report then Top N by Continent from the main dashb
 
 ## CHARACTERISTIC INFORMATION
 **Goal in Context**
-As a Data Analyst, I want to view the top N most populated capital cities within a selected region so that I can understand and compare the largest regional administrative centers.
+As a Data Analyst, I want to view the top N most populated capital cities within a selected region so that I can understand and compare the largest regional administrative centers for the organization.
 
 **Scope**
 World Population Reporting System
