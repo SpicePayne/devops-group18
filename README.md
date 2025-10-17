@@ -27,17 +27,11 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 |  40797981                    |     20      |              |
 |  40791863                    |     20      |              |
 
-
 ## Badges
 
 [![LICENSE](https://img.shields.io/github/license/SpicePayne/devops.svg?style=flat-square)](https://github.com/SpicePayne/devops/blob/master/LICENSE)
+[![Releases](https://img.shields.io/github/release/SpicePayne/devops/all.svg?style=flat-square)](https://github.com/SpicePayne/devops/releases)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
-
-![Master Build Status](https://img.shields.io/github/workflow/status/SpicePayne/devops-group18/main/master?style=flat-square)
-
-![Develope Build Status](https://img.shields.io/github/workflow/status/SpicePayne/devops-group18/main/develop?style=flat-square)
-
-[![Releases](https://img.shields.io/github/release/SpicePayne/devops/all.svg?style=flat-square)](https://github.com/SpicePayne/devops/releases)
