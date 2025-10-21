@@ -15,7 +15,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    name: Build and Start Using docker-compose
+    name: Git DevOps Workflow
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 

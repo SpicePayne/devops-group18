@@ -1,4 +1,4 @@
 FROM openjdk:25
-COPY ./target/ReportsApp.jar /tmp
+COPY ./target/v0.1-alpha-3.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "ReportsApp"]
+ENTRYPOINT ["java", "-jar", "v0.1-alpha-3.jar"]
