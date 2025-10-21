@@ -2,61 +2,83 @@ package com.napier.app;
 
 import java.sql.*;
 
-public class ReportsApp
-{
-    public static void main(String[] args)
-    {
-        try
-        {
-            // Load Database driver
+
+public class ReportsApp {
+
+    // Connection object
+    private static Connection connection = null;
+
+    // Method 1: Connect to Database
+    public static void connectToDatabase() {
+        try {
+            // Retrieve credentials securely from environment variables
+            String url = System.getenv("DB_URL");        // stored in environment variable
+            String user = System.getenv("DB_USER");      // stored in environment variable
+            String password = System.getenv("DB_PASS");  // stored in environment variable
+
+            if (url == null || user == null || password == null) {
+                System.err.println("Missing database environment variables (DB_URL, DB_USER, DB_PASS).");
+                return;
+            }
+
+            // Load JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Successfully connected to the database.");
+
+        } catch (SQLException e) {
+            System.err.println("Database connection error: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBC Driver not found: " + e.getMessage());
         }
-        catch (ClassNotFoundException e)
-        {
-            System.out.println("Could not load SQL driver");
-            System.exit(-1);
+    }
+
+    //  Method 2: Disconnect from Database
+    public static void disconnectDatabase() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+                System.out.println("🔌 Database connection closed.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error closing connection: " + e.getMessage());
+        }
+    }
+
+    //  Method 3: Display countries sorted by population (ascending)
+    public static void displayCountriesAscending() {
+        if (connection == null) {
+            System.err.println("Please connect to the database first.");
+            return;
         }
 
-        // Connect to the database
-        Connection con = null;
-        int retries = 100;
-        for (int i = 0; i < retries; ++i)
-        {
-            System.out.println("Connecting to database...");
-            try
-            {
-                // Wait timer for mysql database initialize
-                Thread.sleep(1000);
-                // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "password");
-                System.out.println("Successfully connected");
-                // Hold timer for init
-                Thread.sleep(1000);
-                // Exit loop process
-                break;
-            }
-            catch (SQLException sqle)
-            {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
-                System.out.println(sqle.getMessage());
-            }
-            catch (InterruptedException ie)
-            {
-                System.out.println("Thread interrupted? Should not happen.");
-            }
-        }
+        String query = "SELECT name, population FROM country ORDER BY population ASC";
 
-        if (con != null)
-        {
-            try
-            {
-                // Close connection
-                con.close();
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            System.out.println("\n Countries sorted by population (smallest → largest):");
+            System.out.println("---------------------------------------------------------");
+            System.out.printf("%-40s %s%n", "Country", "Population");
+            System.out.println("---------------------------------------------------------");
+
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                long population = resultSet.getLong("population");
+                System.out.printf("%-40s %d%n", name, population);
             }
-            catch (Exception e)
-            {
-                System.out.println("Error closing connection to database");
-            }
+
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
         }
+    }
+
+    //  Main method
+    public static void main(String[] args) {
+        connectToDatabase();          // Connect
+        displayCountriesAscending();  // Display results
+        disconnectDatabase();         // Disconnect
     }
 }
