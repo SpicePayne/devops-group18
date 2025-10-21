@@ -1,4 +1,4 @@
 FROM openjdk:25
-COPY ./target/v0.1-alpha-3.jar /tmp
+COPY ./target/v0.1-alpha-2.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "v0.1-alpha-3.jar"]
+ENTRYPOINT ["java", "-jar", "v0.1-alpha-2.jar"]
