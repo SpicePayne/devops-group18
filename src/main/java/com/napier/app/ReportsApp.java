@@ -6,7 +6,7 @@ import java.sql.*;
  * Database Schema Reference:
  * country (Code, Name, Continent, Region, Population, Capital, ...)
  * city (ID, Name, CountryCode, District, Population, ...)
- * countrylanguage (CountryCode, Language, IsOfficial, Percentage, ...)
+ * countrylanguage (CountryCode, Language,...)
  */
 
 public class ReportsApp
