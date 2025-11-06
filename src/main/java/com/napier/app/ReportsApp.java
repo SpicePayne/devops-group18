@@ -17,105 +17,6 @@ public class ReportsApp
         );
     }
 
-    public static void main(String[] args)
-    {
-        // Use args parameter to eliminate warning
-        if (args.length > 0) {
-            System.out.println("Application started with " + args.length + " arguments");
-        }
-
-        try {
-            // Load Database driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        }
-
-        catch (ClassNotFoundException e) {
-            System.out.println("Could not load SQL driver");
-            System.exit(-1);
-        }
-
-        // Establish database connection
-        Connection con = establishDatabaseConnection();
-        if (con == null) {
-            System.out.println("Failed to connect to database after multiple attempts. Exiting.");
-            return;
-        }
-
-        // Main menu loop
-        boolean running = true;
-        Scanner scanner = new Scanner(System.in);
-
-        //Menu
-        while (running) {
-            displayMainMenu();
-            System.out.print("Please, Choose a Report Option from the menu (1-6): ");
-
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (choice) {
-                    case 1:
-                        countryReportsMenu(con, scanner);
-                        break;
-                    case 2:
-                        cityReportsMenu(con, scanner);
-                        break;
-                    case 3:
-                        capitalCityReportsMenu(con, scanner);
-                        break;
-                    case 4:
-                        populationReportsMenu(con, scanner);
-                        break;
-                    case 5:
-                        languageReportsMenu(con, scanner);
-                        break;
-                    case 6:
-                        running = false;
-                        System.out.println("Thank you for using the World Population Reporting System!");
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a number between 1 to 6.");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a valid number between 1 to 6 .");
-                scanner.nextLine(); // Clears the invalid input
-            }
-        }
-
-        // Close resources
-        try {
-            if (con != null) con.close();
-            scanner.close();
-        } catch (Exception e) {
-            System.out.println("Error closing resources: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Establishes database connection with retry logic
-     */
-    private static Connection establishDatabaseConnection() {
-        Connection con = null;
-        int retries = 100;
-
-        for (int i = 0; i < retries; ++i) {
-            System.out.println("Connecting to database...");
-            try {
-                Thread.sleep(1000);
-                con = getDatabaseConnection();
-                System.out.println("Successfully connected to database!");
-                return con;
-            } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " + i);
-                System.out.println(sqle.getMessage());
-            } catch (InterruptedException ie) {
-                System.out.println("Thread interrupted? Should not happen.");
-            }
-        }
-        return null;
-    }
-
     /**
      * Displays the main menu
      */
@@ -199,6 +100,400 @@ public class ReportsApp
                 System.out.println("Invalid input. Please enter a valid number between 1 and 7.");
                 scanner.nextLine(); // Clear invalid input
             }
+        }
+    }
+
+    /**
+     * City Reports Submenu - Release 3.0 & 4.0
+     */
+    private static void cityReportsMenu(Connection con, Scanner scanner) {
+        boolean inSubmenu = true;
+
+        while (inSubmenu) {
+            System.out.println("\n--- CITY REPORTS ---");
+            System.out.println("1. All Cities in World");
+            System.out.println("2. Cities in Continent");
+            System.out.println("3. Cities in Region");
+            System.out.println("4. Cities in Country");
+            System.out.println("5. Cities in District");
+            System.out.println("6. Top N Cities in World");
+            System.out.println("7. Top N Cities in Continent");
+            System.out.println("8. Top N Cities in Region");
+            System.out.println("9. Top N Cities in Country");
+            System.out.println("10. Top N Cities in District");
+            System.out.println("11. Back to Main Menu");
+            System.out.print("Enter your choice (1-11): ");
+
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1:
+                        getAllCitiesByPopulation(con);
+                        break;
+                    case 2:
+                        System.out.print("Enter continent name: ");
+                        String continent = scanner.nextLine();
+                        getCitiesInContinentByPopulation(con, continent);
+                        break;
+                    case 3:
+                        System.out.print("Enter region name: ");
+                        String region = scanner.nextLine();
+                        getCitiesInRegionByPopulation(con, region);
+                        break;
+                    case 4:
+                        System.out.print("Enter country name: ");
+                        String country = scanner.nextLine();
+                        getCitiesInCountryByPopulation(con, country);
+                        break;
+                    case 5:
+                        System.out.print("Enter district name: ");
+                        String district = scanner.nextLine();
+                        getCitiesInDistrictByPopulation(con, district);
+                        break;
+                    case 6:
+                        System.out.print("Enter number of cities (N): ");
+                        int nWorld = scanner.nextInt();
+                        scanner.nextLine();
+                        getTopNCitiesInWorld(con, nWorld);
+                        break;
+                    case 7:
+                        System.out.print("Enter continent name: ");
+                        String continentTopN = scanner.nextLine();
+                        System.out.print("Enter number of cities (N): ");
+                        int nContinent = scanner.nextInt();
+                        scanner.nextLine();
+                        getTopNCitiesInContinent(con, continentTopN, nContinent);
+                        break;
+                    case 8:
+                        System.out.print("Enter region name: ");
+                        String regionTopN = scanner.nextLine();
+                        System.out.print("Enter number of cities (N): ");
+                        int nRegion = scanner.nextInt();
+                        scanner.nextLine();
+                        getTopNCitiesInRegion(con, regionTopN, nRegion);
+                        break;
+                    case 9:
+                        System.out.print("Enter country name: ");
+                        String countryTopN = scanner.nextLine();
+                        System.out.print("Enter number of cities (N): ");
+                        int nCountry = scanner.nextInt();
+                        scanner.nextLine();
+                        getTopNCitiesInCountry(con, countryTopN, nCountry);
+                        break;
+                    case 10:
+                        System.out.print("Enter district name: ");
+                        String districtTopN = scanner.nextLine();
+                        System.out.print("Enter number of cities (N): ");
+                        int nDistrict = scanner.nextInt();
+                        scanner.nextLine();
+                        getTopNCitiesInDistrict(con, districtTopN, nDistrict);
+                        break;
+                    case 11:
+                        inSubmenu = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number between 1 and 11.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Clear invalid input
+            }
+        }
+    }
+
+    /**
+     * Capital City Reports Submenu - Release 5.0 & 6.0
+     */
+    private static void capitalCityReportsMenu(Connection con, Scanner scanner) {
+        boolean inSubmenu = true;
+
+        while (inSubmenu) {
+            System.out.println("\n--- CAPITAL CITY REPORTS ---");
+            System.out.println("1. All Capital Cities in World");
+            System.out.println("2. Capital Cities in Continent");
+            System.out.println("3. Capital Cities in Region");
+            System.out.println("4. Top N Capital Cities in World");
+            System.out.println("5. Top N Capital Cities in Continent");
+            System.out.println("6. Top N Capital Cities in Region");
+            System.out.println("7. Back to Main Menu");
+            System.out.print("Enter your choice (1-7): ");
+
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1:
+                        getAllCapitalCitiesByPopulation(con);
+                        break;
+                    case 2:
+                        System.out.print("Enter continent name: ");
+                        String continent = scanner.nextLine();
+                        getCapitalCitiesInContinentByPopulation(con, continent);
+                        break;
+                    case 3:
+                        System.out.print("Enter region name: ");
+                        String region = scanner.nextLine();
+                        getCapitalCitiesInRegionByPopulation(con, region);
+                        break;
+                    case 4:
+                        System.out.print("Enter number of capital cities (N): ");
+                        int nWorld = scanner.nextInt();
+                        scanner.nextLine();
+                        getTopNCapitalCitiesInWorld(con, nWorld);
+                        break;
+                    case 5:
+                        System.out.print("Enter continent name: ");
+                        String continentTopN = scanner.nextLine();
+                        System.out.print("Enter number of capital cities (N): ");
+                        int nContinent = scanner.nextInt();
+                        scanner.nextLine();
+                        getTopNCapitalCitiesInContinent(con, continentTopN, nContinent);
+                        break;
+                    case 6:
+                        System.out.print("Enter region name: ");
+                        String regionTopN = scanner.nextLine();
+                        System.out.print("Enter number of capital cities (N): ");
+                        int nRegion = scanner.nextInt();
+                        scanner.nextLine();
+                        getTopNCapitalCitiesInRegion(con, regionTopN, nRegion);
+                        break;
+                    case 7:
+                        inSubmenu = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number between 1 and 7.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Clear invalid input
+            }
+        }
+    }
+
+    /**
+     * Population Reports Submenu - Release 7.0 & 9.0
+     */
+    private static void populationReportsMenu(Connection con, Scanner scanner) {
+        boolean inSubmenu = true;
+
+        while (inSubmenu) {
+            System.out.println("\n--- POPULATION REPORTS ---");
+            System.out.println("1. Population Report by Continent");
+            System.out.println("2. Population Report by Region");
+            System.out.println("3. Population Report by Country");
+            System.out.println("4. Overall World Population Summary");
+            System.out.println("5. Population Summary by Continent");
+            System.out.println("6. Population Summary by Region");
+            System.out.println("7. Population Summary by Country");
+            System.out.println("8. Population Summary by District");
+            System.out.println("9. Population Summary by City");
+            System.out.println("10. Back to Main Menu");
+            System.out.print("Enter your choice (1-10): ");
+
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1:
+                        getPopulationReportByContinent(con);
+                        break;
+                    case 2:
+                        System.out.print("Enter region name: ");
+                        String region = scanner.nextLine();
+                        getPopulationReportByRegion(con, region);
+                        break;
+                    case 3:
+                        System.out.print("Enter country name: ");
+                        String country = scanner.nextLine();
+                        getPopulationReportByCountry(con, country);
+                        break;
+                    case 4:
+                        getWorldPopulationSummary(con);
+                        break;
+                    case 5:
+                        System.out.print("Enter continent name: ");
+                        String continentSummary = scanner.nextLine();
+                        getPopulationSummaryByContinent(con, continentSummary);
+                        break;
+                    case 6:
+                        System.out.print("Enter region name: ");
+                        String regionSummary = scanner.nextLine();
+                        getPopulationSummaryByRegion(con, regionSummary);
+                        break;
+                    case 7:
+                        System.out.print("Enter country name: ");
+                        String countrySummary = scanner.nextLine();
+                        getPopulationSummaryByCountry(con, countrySummary);
+                        break;
+                    case 8:
+                        System.out.print("Enter district name: ");
+                        String districtSummary = scanner.nextLine();
+                        getPopulationSummaryByDistrict(con, districtSummary);
+                        break;
+                    case 9:
+                        System.out.print("Enter city name: ");
+                        String citySummary = scanner.nextLine();
+                        getPopulationSummaryByCity(con, citySummary);
+                        break;
+                    case 10:
+                        inSubmenu = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number between 1 and 10.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Clear invalid input
+            }
+        }
+    }
+
+    /**
+     * Language Reports Submenu - Release 8.0
+     */
+    private static void languageReportsMenu(Connection con, Scanner scanner) {
+        boolean inSubmenu = true;
+
+        while (inSubmenu) {
+            System.out.println("\n--- LANGUAGE REPORTS ---");
+            System.out.println("1. Key Languages Report (Chinese, English, Hindi, Spanish, Arabic)");
+            System.out.println("2. Custom Languages Report");
+            System.out.println("3. Back to Main Menu");
+            System.out.print("Enter your choice (1-3): ");
+
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1:
+                        // Default key languages as specified in use case
+                        String[] keyLanguages = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
+                        getLanguageReport(con, keyLanguages);
+                        break;
+                    case 2:
+                        System.out.print("Enter languages (comma-separated, e.g., French,German,Japanese): ");
+                        String input = scanner.nextLine();
+                        String[] customLanguages = input.split(",");
+                        // Trim whitespace from each language
+                        for (int i = 0; i < customLanguages.length; i++) {
+                            customLanguages[i] = customLanguages[i].trim();
+                        }
+                        getLanguageReport(con, customLanguages);
+                        break;
+                    case 3:
+                        inSubmenu = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number between 1 and 3.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Clear invalid input
+            }
+        }
+    }
+
+    /**
+     * Establishes database connection with retry logic
+     */
+    private static Connection establishDatabaseConnection() {
+        Connection con = null;
+        int retries = 100;
+
+        for (int i = 0; i < retries; ++i) {
+            System.out.println("Connecting to database...");
+            try {
+                Thread.sleep(1000);
+                con = getDatabaseConnection();
+                System.out.println("Successfully connected to database!");
+                return con;
+            } catch (SQLException sqle) {
+                System.out.println("Failed to connect to database attempt " + i);
+                System.out.println(sqle.getMessage());
+            } catch (InterruptedException ie) {
+                System.out.println("Thread interrupted? Should not happen.");
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args)
+    {
+        // Use args parameter to eliminate warning
+        if (args.length > 0) {
+            System.out.println("Application started with " + args.length + " arguments");
+        }
+
+        try {
+            // Load Database driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+
+        catch (ClassNotFoundException e) {
+            System.out.println("Could not load SQL driver");
+            System.exit(-1);
+        }
+
+        // Establish database connection
+        Connection con = establishDatabaseConnection();
+        if (con == null) {
+            System.out.println("Failed to connect to database after multiple attempts. Exiting.");
+            return;
+        }
+
+        // Main menu loop
+        boolean running = true;
+        Scanner scanner = new Scanner(System.in);
+
+        //Menu
+        while (running) {
+            displayMainMenu();
+            System.out.print("Please, Choose a Report Option from the menu (1-6): ");
+
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (choice) {
+                    case 1:
+                        countryReportsMenu(con, scanner);
+                        break;
+                    case 2:
+                        cityReportsMenu(con, scanner);
+                        break;
+                    case 3:
+                        capitalCityReportsMenu(con, scanner);
+                        break;
+                    case 4:
+                        populationReportsMenu(con, scanner);
+                        break;
+                    case 5:
+                        languageReportsMenu(con, scanner);
+                        break;
+                    case 6:
+                        running = false;
+                        System.out.println("Thank you for using the World Population Reporting System!");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number between 1 to 6.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a valid number between 1 to 6 .");
+                scanner.nextLine(); // Clears the invalid input
+            }
+        }
+
+        // Close resources
+        try {
+            if (con != null) con.close();
+            scanner.close();
+        } catch (Exception e) {
+            System.out.println("Error closing resources: " + e.getMessage());
         }
     }
 
@@ -591,106 +886,6 @@ public class ReportsApp
         } catch (SQLException e) {
             System.out.println("Unable to retrieve data. Please check database connection.");
             System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    /**
-     * City Reports Submenu - Release 3.0 & 4.0
-     */
-    private static void cityReportsMenu(Connection con, Scanner scanner) {
-        boolean inSubmenu = true;
-
-        while (inSubmenu) {
-            System.out.println("\n--- CITY REPORTS ---");
-            System.out.println("1. All Cities in World");
-            System.out.println("2. Cities in Continent");
-            System.out.println("3. Cities in Region");
-            System.out.println("4. Cities in Country");
-            System.out.println("5. Cities in District");
-            System.out.println("6. Top N Cities in World");
-            System.out.println("7. Top N Cities in Continent");
-            System.out.println("8. Top N Cities in Region");
-            System.out.println("9. Top N Cities in Country");
-            System.out.println("10. Top N Cities in District");
-            System.out.println("11. Back to Main Menu");
-            System.out.print("Enter your choice (1-11): ");
-
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
-
-                switch (choice) {
-                    case 1:
-                        getAllCitiesByPopulation(con);
-                        break;
-                    case 2:
-                        System.out.print("Enter continent name: ");
-                        String continent = scanner.nextLine();
-                        getCitiesInContinentByPopulation(con, continent);
-                        break;
-                    case 3:
-                        System.out.print("Enter region name: ");
-                        String region = scanner.nextLine();
-                        getCitiesInRegionByPopulation(con, region);
-                        break;
-                    case 4:
-                        System.out.print("Enter country name: ");
-                        String country = scanner.nextLine();
-                        getCitiesInCountryByPopulation(con, country);
-                        break;
-                    case 5:
-                        System.out.print("Enter district name: ");
-                        String district = scanner.nextLine();
-                        getCitiesInDistrictByPopulation(con, district);
-                        break;
-                    case 6:
-                        System.out.print("Enter number of cities (N): ");
-                        int nWorld = scanner.nextInt();
-                        scanner.nextLine();
-                        getTopNCitiesInWorld(con, nWorld);
-                        break;
-                    case 7:
-                        System.out.print("Enter continent name: ");
-                        String continentTopN = scanner.nextLine();
-                        System.out.print("Enter number of cities (N): ");
-                        int nContinent = scanner.nextInt();
-                        scanner.nextLine();
-                        getTopNCitiesInContinent(con, continentTopN, nContinent);
-                        break;
-                    case 8:
-                        System.out.print("Enter region name: ");
-                        String regionTopN = scanner.nextLine();
-                        System.out.print("Enter number of cities (N): ");
-                        int nRegion = scanner.nextInt();
-                        scanner.nextLine();
-                        getTopNCitiesInRegion(con, regionTopN, nRegion);
-                        break;
-                    case 9:
-                        System.out.print("Enter country name: ");
-                        String countryTopN = scanner.nextLine();
-                        System.out.print("Enter number of cities (N): ");
-                        int nCountry = scanner.nextInt();
-                        scanner.nextLine();
-                        getTopNCitiesInCountry(con, countryTopN, nCountry);
-                        break;
-                    case 10:
-                        System.out.print("Enter district name: ");
-                        String districtTopN = scanner.nextLine();
-                        System.out.print("Enter number of cities (N): ");
-                        int nDistrict = scanner.nextInt();
-                        scanner.nextLine();
-                        getTopNCitiesInDistrict(con, districtTopN, nDistrict);
-                        break;
-                    case 11:
-                        inSubmenu = false;
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a number between 1 and 11.");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // Clear invalid input
-            }
         }
     }
 
@@ -1295,76 +1490,6 @@ public class ReportsApp
         }
     }
 
-    /**
-     * Capital City Reports Submenu - Release 5.0 & 6.0
-     */
-    private static void capitalCityReportsMenu(Connection con, Scanner scanner) {
-        boolean inSubmenu = true;
-
-        while (inSubmenu) {
-            System.out.println("\n--- CAPITAL CITY REPORTS ---");
-            System.out.println("1. All Capital Cities in World");
-            System.out.println("2. Capital Cities in Continent");
-            System.out.println("3. Capital Cities in Region");
-            System.out.println("4. Top N Capital Cities in World");
-            System.out.println("5. Top N Capital Cities in Continent");
-            System.out.println("6. Top N Capital Cities in Region");
-            System.out.println("7. Back to Main Menu");
-            System.out.print("Enter your choice (1-7): ");
-
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
-
-                switch (choice) {
-                    case 1:
-                        getAllCapitalCitiesByPopulation(con);
-                        break;
-                    case 2:
-                        System.out.print("Enter continent name: ");
-                        String continent = scanner.nextLine();
-                        getCapitalCitiesInContinentByPopulation(con, continent);
-                        break;
-                    case 3:
-                        System.out.print("Enter region name: ");
-                        String region = scanner.nextLine();
-                        getCapitalCitiesInRegionByPopulation(con, region);
-                        break;
-                    case 4:
-                        System.out.print("Enter number of capital cities (N): ");
-                        int nWorld = scanner.nextInt();
-                        scanner.nextLine();
-                        getTopNCapitalCitiesInWorld(con, nWorld);
-                        break;
-                    case 5:
-                        System.out.print("Enter continent name: ");
-                        String continentTopN = scanner.nextLine();
-                        System.out.print("Enter number of capital cities (N): ");
-                        int nContinent = scanner.nextInt();
-                        scanner.nextLine();
-                        getTopNCapitalCitiesInContinent(con, continentTopN, nContinent);
-                        break;
-                    case 6:
-                        System.out.print("Enter region name: ");
-                        String regionTopN = scanner.nextLine();
-                        System.out.print("Enter number of capital cities (N): ");
-                        int nRegion = scanner.nextInt();
-                        scanner.nextLine();
-                        getTopNCapitalCitiesInRegion(con, regionTopN, nRegion);
-                        break;
-                    case 7:
-                        inSubmenu = false;
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a number between 1 and 7.");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // Clear invalid input
-            }
-        }
-    }
-
     // CAPITAL CITY USE CASE #17: All Capital Cities in World
     /**
      * Gets all capital cities in the world sorted by population (largest to smallest)
@@ -1712,85 +1837,6 @@ public class ReportsApp
         } catch (SQLException e) {
             System.out.println("Unable to retrieve data. Please check database connection.");
             System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Population Reports Submenu - Release 7.0 & 9.0
-     */
-    private static void populationReportsMenu(Connection con, Scanner scanner) {
-        boolean inSubmenu = true;
-
-        while (inSubmenu) {
-            System.out.println("\n--- POPULATION REPORTS ---");
-            System.out.println("1. Population Report by Continent");
-            System.out.println("2. Population Report by Region");
-            System.out.println("3. Population Report by Country");
-            System.out.println("4. Overall World Population Summary");
-            System.out.println("5. Population Summary by Continent");
-            System.out.println("6. Population Summary by Region");
-            System.out.println("7. Population Summary by Country");
-            System.out.println("8. Population Summary by District");
-            System.out.println("9. Population Summary by City");
-            System.out.println("10. Back to Main Menu");
-            System.out.print("Enter your choice (1-10): ");
-
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
-
-                switch (choice) {
-                    case 1:
-                        getPopulationReportByContinent(con);
-                        break;
-                    case 2:
-                        System.out.print("Enter region name: ");
-                        String region = scanner.nextLine();
-                        getPopulationReportByRegion(con, region);
-                        break;
-                    case 3:
-                        System.out.print("Enter country name: ");
-                        String country = scanner.nextLine();
-                        getPopulationReportByCountry(con, country);
-                        break;
-                    case 4:
-                        getWorldPopulationSummary(con);
-                        break;
-                    case 5:
-                        System.out.print("Enter continent name: ");
-                        String continentSummary = scanner.nextLine();
-                        getPopulationSummaryByContinent(con, continentSummary);
-                        break;
-                    case 6:
-                        System.out.print("Enter region name: ");
-                        String regionSummary = scanner.nextLine();
-                        getPopulationSummaryByRegion(con, regionSummary);
-                        break;
-                    case 7:
-                        System.out.print("Enter country name: ");
-                        String countrySummary = scanner.nextLine();
-                        getPopulationSummaryByCountry(con, countrySummary);
-                        break;
-                    case 8:
-                        System.out.print("Enter district name: ");
-                        String districtSummary = scanner.nextLine();
-                        getPopulationSummaryByDistrict(con, districtSummary);
-                        break;
-                    case 9:
-                        System.out.print("Enter city name: ");
-                        String citySummary = scanner.nextLine();
-                        getPopulationSummaryByCity(con, citySummary);
-                        break;
-                    case 10:
-                        inSubmenu = false;
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a number between 1 and 10.");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // Clear invalid input
-            }
         }
     }
 
@@ -2268,52 +2314,6 @@ public class ReportsApp
         } catch (SQLException e) {
             System.out.println("Unable to retrieve data. Please check database connection.");
             System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Language Reports Submenu - Release 8.0
-     */
-    private static void languageReportsMenu(Connection con, Scanner scanner) {
-        boolean inSubmenu = true;
-
-        while (inSubmenu) {
-            System.out.println("\n--- LANGUAGE REPORTS ---");
-            System.out.println("1. Key Languages Report (Chinese, English, Hindi, Spanish, Arabic)");
-            System.out.println("2. Custom Languages Report");
-            System.out.println("3. Back to Main Menu");
-            System.out.print("Enter your choice (1-3): ");
-
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
-
-                switch (choice) {
-                    case 1:
-                        // Default key languages as specified in use case
-                        String[] keyLanguages = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
-                        getLanguageReport(con, keyLanguages);
-                        break;
-                    case 2:
-                        System.out.print("Enter languages (comma-separated, e.g., French,German,Japanese): ");
-                        String input = scanner.nextLine();
-                        String[] customLanguages = input.split(",");
-                        // Trim whitespace from each language
-                        for (int i = 0; i < customLanguages.length; i++) {
-                            customLanguages[i] = customLanguages[i].trim();
-                        }
-                        getLanguageReport(con, customLanguages);
-                        break;
-                    case 3:
-                        inSubmenu = false;
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a number between 1 and 3.");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // Clear invalid input
-            }
         }
     }
 
