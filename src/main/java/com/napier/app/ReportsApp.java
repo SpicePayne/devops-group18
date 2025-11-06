@@ -8,6 +8,15 @@ import java.util.Scanner;
  */
 public class ReportsApp
 {
+    //Database connection method
+    private static Connection getDatabaseConnection() throws SQLException {
+        return DriverManager.getConnection(
+                "jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true",
+                "root",
+                "password"
+        );
+    }
+
     public static void main(String[] args)
     {
         // Use args parameter to eliminate warning
@@ -105,17 +114,6 @@ public class ReportsApp
             }
         }
         return null;
-    }
-
-    /**
-     * Creates and returns a database connection
-     */
-    private static Connection getDatabaseConnection() throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true",
-                "root",
-                "password"
-        );
     }
 
     /**
