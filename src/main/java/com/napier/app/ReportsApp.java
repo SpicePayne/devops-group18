@@ -11,8 +11,12 @@ import java.sql.*;
 
 public class ReportsApp
 {
-    public static void main(String[] args)  // Keep 'public' - it's required for main method
+    public static void main(String... args)  // Keep 'public' - it's required for main method
     {
+        if (args.length > 0) {
+            System.out.println("Application started with " + args.length + " arguments");
+        }
+
         try
         {
             // Load Database driver
@@ -87,7 +91,7 @@ public class ReportsApp
      */
     private static Connection getDatabaseConnection() throws SQLException {
         return DriverManager.getConnection(
-                "jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true",
+                "jdbc:mysql://localhost:33060/world?useSSL=false&allowPublicKeyRetrieval=true",
                 "root",
                 "password"
         );
