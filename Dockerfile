@@ -1,4 +1,4 @@
-FROM openjdk:21-jdk
-COPY ./target/ReportsApp.jar /tmp
+FROM openjdk:21
+COPY ./target/*.jar /tmp/app.jar
 WORKDIR /tmp
 ENTRYPOINT ["java", "-jar", "ReportsApp.jar"]
