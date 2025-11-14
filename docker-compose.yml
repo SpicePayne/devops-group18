@@ -2,7 +2,9 @@ services:
 
   # Build app from Dockerfile in same folder
   app:
-    build: db/.                # Uses db/Dockerfile
+    build: .                #  Points to root Dockerfile (Java app)
+    stdin_open: true
+    tty: true
     depends_on:
       db:
         condition: service_healthy
@@ -10,13 +12,13 @@ services:
   # Build the db as name world from the Dockerfile in the db folder
   # exposing the port if we want to run code outside a container
   db:
-    build: db/.
+    build: db/.       # Points to db/Dockerfile (MySQL)
     ports:
-      - "33060:3306"
+      - "33061:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=world
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
-      retries: 10
+      retries: 20
