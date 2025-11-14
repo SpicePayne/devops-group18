@@ -1,5 +1,5 @@
 # Use the latest MySQL image as the base
-FROM mysql:8.0
+FROM mysql/mysql-server:latest
 
 # Set environment variables for MySQL root and user credentials
 ENV MYSQL_ROOT_PASSWORD=password

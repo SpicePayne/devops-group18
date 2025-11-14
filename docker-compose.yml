@@ -2,7 +2,7 @@ services:
 
   # Build app from Dockerfile in same folder
   app:
-    build: .
+    build: db/.                # Uses db/Dockerfile
     depends_on:
       db:
         condition: service_healthy
