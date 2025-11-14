@@ -450,7 +450,7 @@ public class ReportsApp
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
 
-        //Menu
+        //Main Menu
         while (running) {
             displayMainMenu();
             System.out.print("Please, Choose a Report Option from the menu (1-6): ");
