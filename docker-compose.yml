@@ -1,8 +1,11 @@
+version: '3'
 services:
 
   # Build app from Dockerfile in same folder
   app:
     build: .
+    stdin_open: true
+    tty: true
     depends_on:
       db:
         condition: service_healthy
@@ -11,6 +14,7 @@ services:
   # exposing the port if we want to run code outside a container
   db:
     build: db/.
+    restart: always
     ports:
       - "33060:3306"
     environment:
