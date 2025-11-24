@@ -20,13 +20,13 @@ jobs:
         uses: actions/checkout@v4
 
       # -----------------------------------------
-      # 2. Install Java 25 (Temurin)
+      # 2. Install Java 25 (Corretto)
       # -----------------------------------------
       - name: Set up Java 25
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5.0.0
         with:
           java-version: '25'
-          distribution: 'amazoncorretto'
+          distribution: 'corretto'
 
       # -----------------------------------------
       # 3. Cache Maven dependencies
