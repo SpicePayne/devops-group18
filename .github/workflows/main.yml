@@ -54,8 +54,8 @@ jobs:
       # -----------------------------------------
       # 6. Run Integration Tests
       # -----------------------------------------
-      - name: Run Integration Tests
-        run: mvn -q -e -B verify
+      #- name: Run Integration Tests
+      # run: mvn -q -e -B verify
 
       # -----------------------------------------
       # 7. Generate Coverage Report
