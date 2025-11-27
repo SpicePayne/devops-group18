@@ -34,7 +34,6 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 
 [![CI workflow for Group-18](https://github.com/SpicePayne/devops-group18/actions/workflows/main.yml/badge.svg)](https://github.com/SpicePayne/devops-group18/actions/workflows/main.yml)
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/SpicePayne/devops-group18/main.yml?branch=develop&style=flat-square)
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/SpicePayne/devops-group18/develop.yml?branch=develop&style=flat-square)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
