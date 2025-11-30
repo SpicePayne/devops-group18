@@ -1,573 +1,97 @@
-# USE CASE #7: View all cities in the world by population (City Report)
+# USE CASE: City Reports
 
 ## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view all cities in the world sorted from largest to smallest population so that I can identify and analyze major global urban centers for the organization.
 
-**Scope**
+### Goal in Context
+As a Data Analyst, I want to generate various city-level population reports including all cities in the world, cities within a specific continent, region, country, or district, and the top N most populated cities globally, by continent, region, country, or district so that I can analyze and compare urban population distribution across multiple geographic levels for the organization.
+
+### Scope
 World Population Reporting System
 
-**Level**
+### Level
 Primary task
 
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* City data is properly linked to country data.
-* The user is logged into the system interface (CLI or GUI).
+## Preconditions
+- The database (world.sql) is connected and loaded.
+- The user is logged into the system interface (CLI or GUI).
+- City data is properly linked to country, region, and continent data.
+- Valid continent, region, country, and district names exist in the database.
+- For "Top N" reports, a valid integer (N) is provided by the user.
 
-**Success End Condition**
-The system successfully generates and displays a list of all cities in the world ordered from largest to smallest population.
+### Success End Condition
+The system successfully generates and displays a formatted list of cities meeting the user's selection criteria, sorted by population in descending order.
 
-**Failed End Condition**
-Database connection fails, data query fails, or no city records are returned.
+### Failed End Condition
+Invalid input, no matching results, or a database connection/query failure prevents the report from being generated or displayed.
 
-**Primary Actor**
+### Primary Actor
 Data Analyst
 
-**Trigger**
-The user selects the City Report then All Cities option from the system dashboard.
+### Trigger
+The user selects a City Report option from the main Population Reports Menu:
+- **7** - All cities in world
+- **8** - All cities in a continent
+- **9** - All cities in a region
+- **10** - All cities in a country
+- **11** - All cities in a district
+- **12** - Top N cities in world
+- **13** - Top N cities in a continent
+- **14** - Top N cities in a region
+- **15** - Top N cities in a country
+- **16** - Top N cities in a district
 
 ## MAIN SUCCESS SCENARIO
+
 1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with available report types.
-3. The user selects City Report from the dashboard options.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects All Cities.
-6. The system executes a SQL query to retrieve all cities from the database.
-7. The system sorts the results by population in descending order.
-8. The system displays the formatted report in the following columns: **Name, Country, District, Population**
-9. The user reviews or exports the report for further analysis.
+2. The system displays the main Population Reports Menu with numbered options (0-32).
+3. The user selects a City Report option from the main menu (7-16).
+4. Depending on the selection:
+   - **Option 7**: System immediately generates and displays all cities report
+   - **Option 8**: System displays continent submenu with numbered options (1-7) and prompts "Select Continent:"
+   - **Option 9**: System displays region submenu with numbered options (1-25) and prompts "Select Region:"
+   - **Option 10**: System displays country submenu with numbered options (1-259) and prompts "Select Country:"
+   - **Option 11**: System displays district submenu with numbered options (1-1367) and prompts "Select District:"
+   - **Option 12**: System prompts "Enter N:" for the top N value, then generates report
+   - **Option 13**: System displays continent submenu, user selects continent, then system prompts "Enter N:"
+   - **Option 14**: System displays region submenu, user selects region, then system prompts "Enter N:"
+   - **Option 15**: System displays country submenu, user selects country, then system prompts "Enter N:"
+   - **Option 16**: System displays district submenu, user selects district, then system prompts "Enter N:"
+5. The user provides required inputs through numbered menu selections or numeric N values.
+6. The system validates all inputs.
+7. The system executes the relevant SQL query based on the selected report type.
+8. The system retrieves the appropriate dataset from the database.
+9. The system formats and displays the report in tabular format with columns: `Name | Country | District | Population`
+10. The user reviews the report on-screen.
+11. The system returns to the main menu for additional report selections.
 
 ## EXTENSIONS
-* **6a.** Database connection fails, System logs the error and displays: "Unable to connect to database. Please check your connection and try again."
-* **7a.** Query returns no results; System displays: "No city data available."
-* **8a.** Data display or rendering error, System displays: "Unable to display results. Please retry."
+
+### 6a. Invalid Input
+- User enters an invalid menu option number, System displays:
+  "Invalid entry. Please enter a correct report option number."
+
+### 6b. Invalid N Value
+- User enters a non-numeric, zero, or negative N, System displays:
+  "Invalid value. Please enter a positive whole number."
+
+### 8a. Database Connection Error
+- If the database connection fails, System logs the error and displays:
+  "Unable to retrieve data. Please check database connection."
+
+### 8b. Query Returns No Results
+- If no records match filters, System displays:
+  "No data available for the selected criteria."
+
+### 10a. Display Error
+- If rendering fails, System displays:
+  "Unable to display report. Please retry."
 
 ## SUB-VARIATIONS
-* The report may be exported in CSV, PDF, or displayed as an on-screen table.
+- Reports may be exported as CSV or PDF, or viewed on-screen.
+- "Top N" reports may support configurable sorting options (by population, name, or region).
+- System may allow batch generation of multiple report types in a single session.
+- Future versions may include advanced filters (e.g., "Top 10 cities in Asia within coastal regions").
 
 ## SCHEDULE
-**Due Date:** Release 3.0
-
----
-
-# USE CASE #8: View all cities in a continent by population (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view all cities within a selected continent sorted by population so that I can analyze urbanization patterns and identify major cities across that continent for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* City and country data are properly joined by continent relationships.
-* Valid continent names exist in the database.
-* The user is logged into the system interface (CLI or GUI).
-
-**Success End Condition**
-The system successfully generates and displays a list of all cities within the specified continent ordered from largest to smallest population.
-
-**Failed End Condition**
-Invalid continent name, query returns no results, or database connection fails.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then By Continent option and enters the desired continent name.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with report options.
-3. The user selects City Report from the available options.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects By Continent.
-6. The system prompts the user to enter a continent name (e.g., "Europe").
-7. The user provides a valid continent name.
-8. The system executes a SQL query joining the city, country, and continent data to filter cities belonging to that continent.
-9. The system sorts the results by population in descending order.
-10. The system displays the formatted report in the following columns: **Name, Country, District, Population**
-11. The user reviews the report and may export it for analysis.
-
-## EXTENSIONS
-* **6a.** User enters an invalid or misspelled continent name, System displays: "Invalid continent. Please check the spelling or try again."
-* **8a.** Database connection fails, System logs the error and displays: "Unable to retrieve data. Please check database connection."
-* **9a.** No cities found for the selected continent, System displays: "No city data available for this continent."
-
-## SUB-VARIATIONS
-* The report may be exported in CSV, PDF, or displayed as an on-screen table.
-
-## SCHEDULE
-**Due Date:** Release 3.0
-
----
-
-# USE CASE #9: View all cities in a region by population (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view all cities within a selected region ordered by population so that I can assess regional urbanization and identify the largest population centers in that area for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* City and country data are properly joined by region relationships.
-* Valid region names exist in the database.
-* The user is logged into the system interface (CLI or GUI).
-
-**Success End Condition**
-The system successfully generates and displays a list of all cities within the specified region ordered from largest to smallest population.
-
-**Failed End Condition**
-Invalid region name, query returns no results, or database connection fails.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then By Region option and enters the desired region name.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with report options.
-3. The user selects City Report from the available options.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects by Region.
-6. The system prompts the user to enter a region name (e.g., "Caribbean").
-7. The user provides a valid region name.
-8. The system executes a SQL query joining the city, country, and region data to filter cities belonging to that region.
-9. The system sorts the results by population in descending order.
-10. The system displays the formatted report in the following columns: **Name, Country, District, Population**
-11. The user reviews or exports the report for further analysis.
-
-## EXTENSIONS
-* **6a.** User enters an invalid or misspelled region name; System displays: "Invalid region. Please check the spelling or try again."
-* **8a.** Database connection fails, System logs the error and displays: "Unable to retrieve data. Please check database connection."
-* **9a.** No cities found for the selected region, System displays: "No city data available for this region."
-
-## SUB-VARIATIONS
-* The report may be exported in CSV, PDF, or displayed as an on-screen table.
-
-## SCHEDULE
-**Due Date:** Release 3.0
-
----
-
-# USE CASE #10: View all cities in a country by population (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view all cities within a selected country ordered by population so that I can analyze urban population distribution and identify the major population centers in that country for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* Valid country names exist in the database.
-* City data is linked correctly to each country.
-* The user is logged into the system interface (CLI or GUI).
-
-**Success End Condition**
-The system successfully generates and displays a list of all cities within the specified country, ordered from largest to smallest population.
-
-**Failed End Condition**
-Invalid country name entered, query returns no results, or database connection fails.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then By Country option and enters the desired country name.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with available report options.
-3. The user selects City Report from the options.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects by Country.
-6. The system prompts the user to enter a country name (e.g., "Japan").
-7. The user provides a valid country name.
-8. The system executes a SQL query joining the city and country tables to retrieve all cities within the specified country.
-9. The system sorts the resulting cities by population in descending order.
-10. The system displays the formatted report in the following columns: **City Name, District, Population, Country Code**
-11. The user reviews or exports the report for analysis or presentation.
-
-## EXTENSIONS
-* **6a.** User enters an invalid or misspelled country name; System displays: "Invalid country name. Please try again."
-* **8a.** Database connection fails, System logs the error and displays: "Unable to connect to the database. Please check configuration."
-* **9a.** No cities found for the selected country, System displays: "No city data available for this country."
-
-## SUB-VARIATIONS
-* The report can be exported in CSV, PDF, or displayed as an on-screen table.
-
-## SCHEDULE
-**Due Date:** Release 3.0
-
----
-
-# USE CASE #11: View all cities in a district by population (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view all cities within a selected district ordered by population so that I can analyze local population trends and identify the most populated cities within that district for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* Valid district names exist in the database.
-* City and district data are properly linked.
-* The user is logged into the system interface (CLI or GUI).
-
-**Success End Condition**
-The system successfully generates and displays a list of all cities within the specified district, ordered from largest to smallest population.
-
-**Failed End Condition**
-Invalid district name entered, query returns no results, or database connection fails.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then By District option and enters the desired district name.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with available report options.
-3. The user selects City Report from the list of report categories.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects by District.
-6. The system prompts the user to enter a district name (e.g., "California").
-7. The user provides a valid district name.
-8. The system executes a SQL query joining the city and country tables to retrieve all cities located in that district.
-9. The system sorts the results by population in descending order.
-10. The system displays the formatted report in the following columns: **City Name, District, Population, Country Code**
-11. The user reviews, analyzes, or exports the report for record-keeping or comparison.
-
-## EXTENSIONS
-* **6a.** User enters an invalid or misspelled district name; System displays: "Invalid district. Please check spelling and try again."
-* **8a.** Database connection fails, System logs the error and displays: "Database connection error. Please retry later."
-* **9a.** No cities found for the selected district, System displays: "No data available for this district."
-
-## SUB-VARIATIONS
-* The report may be exported in CSV, PDF, or viewed as an on-screen table.
-
-## SCHEDULE
-**Due Date:** Release 3.0
-
----
-
-# USE CASE #12: View top N populated cities in the world (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view the top N most populated cities worldwide so that I can identify the largest global cities and analyze global urbanization trends for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* The user is logged into the system interface (CLI or GUI).
-* City population data exists and is accurate.
-* The user understands that "N" represents the number of top records to retrieve.
-
-**Success End Condition**
-The system successfully generates and displays a list of the top N cities in the world ordered from largest to smallest population.
-
-**Failed End Condition**
-Invalid or non-numeric input for N, no data returned, or database query fails.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then Top N (World) option and enters a numeric value for N.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with available report categories.
-3. The user selects City Report.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects Top N (World).
-6. The system prompts the user to enter the number of top cities to display (e.g., "10").
-7. The user enters a valid integer value for N.
-8. The system executes a SQL query on the city table to retrieve the top N cities sorted by population in descending order.
-9. The system formats and displays the report in the following columns: **City Name, Country Code, District, Population**
-10. The user reviews the report, optionally exporting or saving it.
-
-## EXTENSIONS
-* **6a.** User enters an invalid input (e.g., text or negative number), System displays: "Invalid entry. Please enter a positive number."
-* **8a.** Database query fails, System logs the error and displays: "Unable to retrieve data. Please check connection."
-* **9a.** No results found (e.g., empty table), System displays: "No city data available."
-
-## SUB-VARIATIONS
-* The report may be exported as CSV or PDF, or displayed in an on-screen table.
-
-## SCHEDULE
-**Due Date:** Release 4.0
-
----
-
-# USE CASE #13: View top N populated cities in a continent (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view the top N populated cities within a specific continent so that I can compare major cities across different continents and analyze regional urban growth patterns for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* Valid continent names exist in the database.
-* The user is logged into the system interface (CLI or GUI).
-* City and country data are correctly linked.
-* The user understands that "N" represents the number of top cities to retrieve.
-
-**Success End Condition**
-The system successfully generates and displays a list of the top N cities in the specified continent, ordered from largest to smallest population.
-
-**Failed End Condition**
-Invalid continent name, invalid value for N, or database connection/query failure prevents report generation.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then Top N (By Continent) option and enters both the continent name and the desired N value.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with report categories.
-3. The user selects City Report.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects Top N (By Continent).
-6. The system prompts the user to enter the continent name (e.g., "Asia").
-7. The user enters a valid continent name.
-8. The system then prompts the user to enter a numeric value for N (e.g., "10").
-9. The user enters a valid integer for N.
-10. The system executes a SQL query joining city and country tables to filter cities belonging to the specified continent and limits the result to the top N by population for the organization.
-11. The system sorts results in descending order by population.
-12. The system displays the report in the following columns: **City Name, Country Name, Continent, District, Population**
-13. The user reviews or exports the report as needed.
-
-## EXTENSIONS
-* **6a.** User enters an invalid or misspelled continent name, System displays: "Invalid continent name. Please try again."
-* **8a.** User enters a non-numeric or invalid N value; System displays: "Please enter a valid number for N."
-* **10a.** Database query fails, System logs the error and displays: "Unable to retrieve data. Check database connection."
-* **11a.** No results found, System displays: "No city data available for the specified continent."
-
-## SUB-VARIATIONS
-* The report can be exported in CSV or PDF format, or displayed as an on-screen table.
-* The user may optionally include country codes in the results.
-
-## SCHEDULE
-**Due Date:** Release 4.0
-
----
-
-# USE CASE #14: View top N populated cities in a region (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view the top N populated cities within a specific region so that I can identify major regional hubs and compare patterns of urban concentration across regions for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* Valid region names exist in the database.
-* The user is logged into the system interface (CLI or GUI).
-* City and country data are correctly linked in the database.
-* The user understands that "N" refers to the number of top cities to display.
-
-**Success End Condition**
-The system successfully generates and displays the top N cities within the specified region, ordered from largest to smallest population.
-
-**Failed End Condition**
-Invalid region name or N value, no results found, or query/database failure.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then Top N (By Region) option and provides both the region name and numeric value for N.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with available report categories.
-3. The user selects City Report.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects Top N (By Region).
-6. The system prompts the user to enter the region name (e.g., "Caribbean").
-7. The user provides a valid region name.
-8. The system prompts the user to enter a numeric value for N (e.g., "10").
-9. The user enters a valid integer value for N.
-10. The system executes a SQL query joining city and country tables, filtering by region, and limiting results to the top N cities by population.
-11. The system sorts the results in descending order by population.
-12. The system displays the formatted report in the following columns: **City Name, Country Name, Region, District, Population**
-13. The user reviews the report and may export or print it.
-
-## EXTENSIONS
-* **6a.** User enters an invalid or misspelled region name; System displays: "Invalid region name. Please try again."
-* **8a.** User enters a non-numeric or invalid N; System displays: "Invalid input. Please enter a positive integer."
-* **10a.** Database query fails, System logs the error and displays: "Database error. Please try again later."
-* **11a.** No results found for the specified region, System displays: "No city data found for this region."
-
-## SUB-VARIATIONS
-* The report may be exported as CSV, PDF, or viewed in an interactive table.
-* The user may choose to include or exclude district data in results.
-
-## SCHEDULE
-**Due Date:** Release 4.0
-
----
-
-# USE CASE #15: View top N populated cities in a country (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view the top N most populated cities within a specific country so that I can identify key national urban centers and analyze how population is distributed within that country for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* Valid country names exist in the database.
-* The user is logged into the system interface (CLI or GUI).
-* The relationship between city and country data is properly defined.
-* The user understands that "N" represents the number of top cities to retrieve.
-
-**Success End Condition**
-The system successfully generates and displays a list of the top N populated cities within the specified country, sorted from largest to smallest population.
-
-**Failed End Condition**
-Invalid country name or N value entered, no matching data found, or query/database connection failure.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then Top N (by Country) option and enters both the country name and numeric value for N.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with available report categories.
-3. The user selects City Report.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects Top N (by Country).
-6. The system prompts the user to enter a country name (e.g., "France").
-7. The user provides a valid country name.
-8. The system prompts the user to enter a numeric value for N (e.g., "5").
-9. The user enters a valid integer value for N.
-10. The system executes a SQL query joining city and country tables, filtering cities that belong to the specified country, and limiting the results to the top N by population.
-11. The system sorts the results in descending order by population.
-12. The system displays the formatted report with the following columns: **City Name, Country Name, District, Population**
-13. The user reviews the report and may export or save it.
-
-## EXTENSIONS
-* **6a.** User enters an invalid or misspelled country name, System displays: "Invalid country name. Please try again."
-* **8a.** User enters a non-numeric or invalid N value, System displays: "Invalid number. Please enter a positive integer."
-* **10a.** Database query fails, System logs the error and displays: "Database connection error. Please try again later."
-* **11a.** No cities found for the specified country; System displays: "No city data found for this country."
-
-## SUB-VARIATIONS
-* The report can be exported in CSV, PDF, or displayed as an interactive table.
-* The user can optionally include country code or city columns.
-
-## SCHEDULE
-**Due Date:** Release 4.0
-
----
-
-# USE CASE #16: View top N populated cities in a district (City Report)
-
-## CHARACTERISTIC INFORMATION
-**Goal in Context**
-As a Data Analyst, I want to view the top N most populated cities within a specific district so that I can analyze small-scale urban population distribution and identify key urban centers at the district level for the organization.
-
-**Scope**
-World Population Reporting System
-
-**Level**
-Primary task
-
-**Preconditions**
-* The database (world.sql) is connected and loaded.
-* Valid district names exist in the database.
-* The user is logged into the system interface (CLI or GUI).
-* The relationship between city and district data is correctly defined.
-* The user understands that "N" represents the number of top cities to retrieve.
-
-**Success End Condition**
-The system successfully generates and displays a list of the top N populated cities within the specified district, sorted from largest to smallest population.
-
-**Failed End Condition**
-Invalid district name or N value entered, no matching data found, or database query failure.
-
-**Primary Actor**
-Data Analyst
-
-**Trigger**
-The user selects the City Report then Top N (by District) option and enters both the district name and the desired numeric value for N.
-
-## MAIN SUCCESS SCENARIO
-1. The user opens the World Population Reporting System.
-2. The system displays the main dashboard with available report categories.
-3. The user selects City Report.
-4. The system displays a submenu for Report Type (All, Continent, Region, Country, District, Top N).
-5. The user selects Top N (by District).
-6. The system prompts the user to enter a district name (e.g., "California").
-7. The user provides a valid district name.
-8. The system prompts the user to enter the desired number of cities (N) to display (e.g., "5").
-9. The user enters a valid integer for N.
-10. The system executes a SQL query on the city table filtering by the specified district and limits results to the top N by population.
-11. The system sorts results in descending order by population.
-12. The system displays the formatted report with the following columns: **City Name, District, Country Name, Population**
-13. The user reviews, exports, or saves the report as needed.
-
-## EXTENSIONS
-* **6a.** User enters an invalid or misspelled district name, System displays: "Invalid district name. Please try again."
-* **8a.** User enters a non-numeric or invalid N value, System displays: "Invalid number. Please enter a positive integer."
-* **10a.** Database query fails, System logs the error and displays: "Database connection error. Please try again later."
-* **11a.** No results found; System displays: "No city data available for the specified district."
-
-## SUB-VARIATIONS
-* The report can be exported as CSV or PDF, or displayed in an interactive table.
-* The user may include district or city if required.
-
-## SCHEDULE
-**Due Date:** Release 4.0
+- **Due Date:** Release 3.0 (Base reports [User stories 7–11])
+- **Due Date:** Release 4.0 (Top N and batch reports [User stories 12–16])
