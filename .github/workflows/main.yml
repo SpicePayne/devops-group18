@@ -64,7 +64,17 @@ jobs:
         run: mvn -q -e jacoco:report
 
       # -----------------------------------------
-      # 8. Upload Coverage Artifact
+      # 8. Upload to Codecov
+      # -----------------------------------------
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          directory: ./target/site/jacoco
+          flags: integration-tests
+          verbose: true
+
+      # -----------------------------------------
+      # 9. Upload Coverage Artifact
       # -----------------------------------------
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
@@ -73,13 +83,13 @@ jobs:
           path: target/site/jacoco
 
       # -----------------------------------------
-      # 9. Build Docker Image
+      # 10. Build Docker Image
       # -----------------------------------------
       - name: Build Docker Image
         run: docker build -t devops-group18-app-1 .
 
       # -----------------------------------------
-      # 10. Validate Docker image runs
+      # 11. Validate Docker image runs
       # -----------------------------------------
       - name: Test container starts
         run: |
