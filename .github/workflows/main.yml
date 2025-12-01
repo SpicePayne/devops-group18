@@ -122,12 +122,10 @@ jobs:
       - name: Verify DB connection
         run: |
           mysql -h 127.0.0.1 -u root -pexample -e "SHOW DATABASES;"
-		  
       - name: Build and run tests
         env:
           NON_INTERACTIVE: true
         run: mvn -B verify --fail-at-end
-		
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
