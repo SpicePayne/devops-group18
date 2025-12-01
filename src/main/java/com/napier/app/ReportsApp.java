@@ -18,6 +18,10 @@ public class ReportsApp {
             while (running) {
                 printMenu();
 
+                if (!scanner.hasNextLine()) {
+                    System.out.println("No input detected. Exiting.");
+                    break;
+                }
                 String input = scanner.nextLine().trim();
 
                 switch (input) {
