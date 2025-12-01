@@ -1,4 +1,6 @@
 name: CI Pipeline
+permissions:
+  contents: write
 on:
   push:
     branches: [ "master" , "develop"]
