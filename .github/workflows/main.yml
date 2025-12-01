@@ -111,7 +111,7 @@ jobs:
         run: |
           echo "Waiting for MySQL..."
           for i in {1..30}; do
-          if mysqladmin ping -h127.0.0.1 -pexample --silent; then
+          if mysqladmin ping -h 127.0.0.1 -pexample --silent; then
            echo "MySQL is ready!"
            break
           fi
