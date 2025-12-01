@@ -144,17 +144,30 @@ jobs:
         with:
           java-version: '25'
           distribution: 'corretto'
-      - name: Package and Run docker compose
-        run: |
-          mvn package -DskipTests
-          docker compose up --abort-on-container-exit
-      - uses: "marvinpinto/action-automatic-releases@latest"
+  name: Build JAR
+        run: mvn package -DskipTests
+
+      - name: Start Docker Compose (detached)
+        run: docker compose up -d --build # Added --build to ensure latest JAR is used
+
+      - name: Wait for services to be ready  # Added to avoid connection issues
+        run: sleep 10
+
+      - name: Run app for connection test
+        run: docker compose exec -e NON_INTERACTIVE=true app java -jar /tmp/ReportsApp.jar
+
+      - name: View DB logs
+        run: docker compose logs db
+
+      - name: Upload JAR to GitHub Release
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
           automatic_release_tag: "latest"
+          prerelease: false
           files: |
-            ./target/*.jar
+            target/*.jar
+            
       - name: Stop Docker Compose
         if: always()  # Ensure cleanup even on failure
         run: docker compose down
