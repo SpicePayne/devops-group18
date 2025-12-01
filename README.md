@@ -80,7 +80,7 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 
 [![Qodana](https://github.com/SpicePayne/devops-group18/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/SpicePayne/devops-group18/actions/workflows/qodana_code_quality.yml)
 
-##Workflow
+## Workflow
 
 1. Identify the user story that will be developed in the next sprint.
 2. Create a new sprint in Zube and assign the selected user story to it.
