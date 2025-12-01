@@ -88,7 +88,7 @@ jobs:
           MYSQL_DATABASE: world
           MYSQL_ROOT_PASSWORD: password
         ports:
-          - 33060:3306
+          - 3306:3306
         options: >-
           --health-cmd="mysqladmin ping -h 127.0.0.1 -ppassword"
           --health-interval=10s
