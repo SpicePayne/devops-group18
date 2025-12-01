@@ -1,36 +1,173 @@
-# ReportsApp Workflow
-
-name: CI-ReportsApp
-
-# Controls when the workflow will run
+name: CI Pipeline
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "develop" ]
+    branches: [ "master", "develop" ]
+  pull_request:
+    branches: [ "master", "develop" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    name: Git DevOps Workflow
-    # The type of runner that the job will run on
+  build-test:
+    name: Build & Test (Unit + Integration)
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      - name: Set up JDK 25
-        uses: actions/setup-java@v4
+      # -----------------------------------------
+      # 1. Check out repository
+      # -----------------------------------------
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      # -----------------------------------------
+      # 2. Install Java 25 (Corretto)
+      # -----------------------------------------
+      - name: Set up Java 25
+        uses: actions/setup-java@v5.0.0
         with:
           java-version: '25'
-          distribution: 'adopt'   
+          distribution: 'corretto'
+
+      # -----------------------------------------
+      # 4. Build project (includes shading the JAR)
+      # -----------------------------------------
+      - name: Run Unit Tests + JaCoCo Coverage
+        run: mvn -B clean test jacoco:report
+
+      # -----------------------------------------
+      # 5. Run Unit Tests
+      # -----------------------------------------
+      - name: Run Unit Tests
+        run: mvn -B test
+
+      # -----------------------------------------
+      # 6. Run Integration Tests
+      # -----------------------------------------
+      #- name: Run Integration Tests
+      # run: mvn -B verify
+      # -----------------------------------------
+      # 7. Generate Coverage Report
+      # -----------------------------------------
+      #- name: Generate JaCoCo Coverage Report
+      #  run: mvn -q -e jacoco:report
+      # -----------------------------------------
+      # 8. Upload to Codecov
+      # -----------------------------------------
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-test-results
+          path: target/surefire-reports/
+
+      - name: Upload Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-coverage-report
+          path: target/site/jacoco/
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./target/site/jacoco/jacoco.xml  # Specify exact file for reliability
+          flags: Unit Tests
+          verbose: true
+          fail_ci_if_error: false  # Don't fail the job if Codecov upload fails
+      # -----------------------------------------
+      # 9. Integration Tests
+      # -----------------------------------------
+  IntegrationTests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:latest
+        env:
+          MYSQL_DATABASE: world
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -ppassword"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v5.0.0
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+
+      - name: Install MySQL client
+        run: sudo apt-get install -y mysql-client
+
+      - name: Wait for MySQL to be ready
+        run: |
+          echo "Waiting for MySQL..."
+          for i in {1..30}; do
+          if mysqladmin ping -h 127.0.0.1 -ppassword --silent; then
+           echo "MySQL is ready!"
+           break
+          fi
+          echo "Still waiting..."
+          sleep 2
+          done
+
+      - name: Verify DB connection
+        run: |
+          mysql -h 127.0.0.1 -u root -ppassword -e "SHOW DATABASES;"
+      #     - name: Build and run tests
+      #      env:
+      #        NON_INTERACTIVE: true
+      #        run: mvn -B verify --fail-at-end
+     # - name: Upload coverage to Codecov
+      #  uses: codecov/codecov-action@v4
+       # with:
+     #     token: ${{ secrets.CODECOV_TOKEN }}
+      #    fail_ci_if_error: true
+  Build:
+    name: Build Run in Docker and Deploy Release
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Set up Java 25
+        uses: actions/setup-java@v5.0.0
+        with:
+          java-version: '25'
+          distribution: 'corretto'
       - name: Package and Run docker compose
         run: |
           mvn package -DskipTests
           docker compose up --abort-on-container-exit
-      - name: view logs
-        run: docker logs devops-group18-app-1
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: "latest"
+          files: |
+            ./target/*.jar
+      - name: Stop Docker Compose
+        if: always()  # Ensure cleanup even on failure
+        run: docker compose down
+
+#      # -----------------------------------------
+#      # 10. Build Docker Image
+#      # -----------------------------------------
+#      - name: Build Docker Image
+#        run: docker build -t devops-group18-app-1 .
+#
+#      # -----------------------------------------
+#      # 11. Validate Docker image runs
+#      # -----------------------------------------
+#      - name: Test container starts
+#        run: |
+#          docker run --rm devops-group18-app-1 || true
