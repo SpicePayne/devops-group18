@@ -46,12 +46,11 @@ jobs:
       #- name: Run Integration Tests
       # run: mvn -B verify
 										
-
       # -----------------------------------------
       # 7. Generate Coverage Report
       # -----------------------------------------
-      - name: Generate JaCoCo Coverage Report
-        run: mvn -q -e jacoco:report
+      #- name: Generate JaCoCo Coverage Report
+      #  run: mvn -q -e jacoco:report
 								   
       # -----------------------------------------
       # 8. Upload to Codecov
