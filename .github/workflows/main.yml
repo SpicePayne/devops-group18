@@ -1,5 +1,6 @@
-name: CI Pipeline
 
+name: CI Pipeline
+	
 on:
   push:
     branches: [ "master", "develop" , "feature-junit" ]
@@ -18,6 +19,8 @@ jobs:
       # -----------------------------------------
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       # -----------------------------------------
       # 2. Install Java 25 (Corretto)
@@ -29,68 +32,236 @@ jobs:
           distribution: 'corretto'
 
       # -----------------------------------------
-      # 3. Cache Maven dependencies
-      # -----------------------------------------
-      - name: Cache Maven repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            maven-
-
-      # -----------------------------------------
       # 4. Build project (includes shading the JAR)
       # -----------------------------------------
-      - name: Build with Maven
-        run: mvn -q -e -B clean package
-
+      - name: Run Unit Tests + JaCoCo Coverage
+        run: mvn -B clean test jacoco:report
+        
       # -----------------------------------------
       # 5. Run Unit Tests
       # -----------------------------------------
       - name: Run Unit Tests
-        run: mvn -q -e -B test
+        run: mvn -B test
 
       # -----------------------------------------
       # 6. Run Integration Tests
       # -----------------------------------------
       #- name: Run Integration Tests
-      # run: mvn -q -e -B verify
+      # run: mvn -B verify
+										
 
       # -----------------------------------------
       # 7. Generate Coverage Report
       # -----------------------------------------
       - name: Generate JaCoCo Coverage Report
         run: mvn -q -e jacoco:report
+								   
 
       # -----------------------------------------
       # 8. Upload to Codecov
       # -----------------------------------------
-      - name: Upload to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          directory: ./target/site/jacoco
-          flags: integration-tests
-          verbose: true
-
-      # -----------------------------------------
-      # 9. Upload Coverage Artifact
-      # -----------------------------------------
-      - name: Upload Coverage Report
+      - name: Upload Test Reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: jacoco-report
-          path: target/site/jacoco
+          name: junit-test-results
+          path: target/surefire-reports/
+
+      - name: Upload Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-coverage-report
+          path: target/site/jacoco/                                       
+                                                                       
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./target/site/jacoco/jacoco.xml  # Specify exact file for reliability
+          flags: Unit Tests
+          verbose: true
+          fail_ci_if_error: false  # Don't fail the job if Codecov upload fails
+																			   
 
       # -----------------------------------------
-      # 10. Build Docker Image
+      # 9. Integration Tests
       # -----------------------------------------
-      - name: Build Docker Image
-        run: docker build -t devops-group18-app-1 .
+  IntegrationTests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:8
+        env:
+          MYSQL_DATABASE: world
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pexample"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 
+        
+      - name: Set up Java 25
+        uses: actions/setup-java@v5.0.0
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+          
+      - name: Install MySQL client
+        run: sudo apt-get install -y mysql-client                     
+                                                   
 
-      # -----------------------------------------
-      # 11. Validate Docker image runs
-      # -----------------------------------------
-      - name: Test container starts
+      - name: Wait for MySQL to be ready                                                               
         run: |
-          docker run --rm devops-group18-app-1 || true
+          echo "Waiting for MySQL..."
+          for i in {1..30}; do
+          if mysqladmin ping -h127.0.0.1 -pexample --silent; then
+           echo "MySQL is ready!"
+           break
+          fi
+          echo "Still waiting..."
+          sleep 2
+          done
+
+      - name: Verify DB connection
+        run: |
+          mysql -h 127.0.0.1 -u root -pexample -e "SHOW DATABASES;"
+
+      - name: Build and run tests
+        env:
+          NON_INTERACTIVE: true
+        run: mvn -B verify --fail-at-end
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+
+  Build:
+    name: Build and Start Using docker-compose
+    runs-on: ubuntu:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'  # Standardized for consistency
+
+      - name: Build JAR
+        run: mvn package -DskipTests
+
+      - name: Start Docker Compose (detached)
+        run: docker compose up -d --build # Added --build to ensure latest JAR is used
+
+      - name: Wait for services to be ready  # Added to avoid connection issues
+        run: sleep 10
+
+      - name: Run app for connection test
+        run: docker compose exec -e NON_INTERACTIVE=true app java -jar /tmp/ReportsApp.jar
+
+      - name: View DB logs
+        run: docker compose logs db
+
+      - name: Upload JAR to GitHub Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          files: |
+            target/*.jar
+
+      - name: Stop Docker Compose
+        if: always()  # Ensure cleanup even on failure
+        run: docker compose down
+   
+#      # -----------------------------------------
+#      # 10. Build Docker Image
+#      # -----------------------------------------
+#      - name: Build Docker Image
+#        run: docker build -t devops-group18-app-1 .
+#
+#      # -----------------------------------------
+#      # 11. Validate Docker image runs
+#      # -----------------------------------------
+#      - name: Test container starts
+#        run: |
+#          docker run --rm devops-group18-app-1 || true
+							  
+																 
+								 
+				
+			
+								 
+				 
+			  
+
+								  
+			  
+																   
+
+								 
+			
+							   
+										
+
+										
+									   
+			 
+											 
+								
+
+		
+											  
+						  
+		  
+					  
+								 
+			 
+							   
+
+						   
+								   
+			 
+							
+																 
+
+					   
+									
+
+											 
+																					  
+
+																			   
+					 
+
+										 
+																						  
+
+						  
+								   
+
+										  
+															
+			 
+												   
+										 
+						   
+				  
+						
+
+								 
+													  
+								
