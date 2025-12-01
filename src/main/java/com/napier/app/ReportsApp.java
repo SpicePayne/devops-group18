@@ -89,6 +89,8 @@ public class ReportsApp {
                     default -> System.out.println("Invalid option. Try again.");
                 }
             }
+        } catch (SQLException e) {
+            System.err.println("Error closing connection: " + e.getMessage());
         }
     }
 

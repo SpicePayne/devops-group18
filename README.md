@@ -21,11 +21,11 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 ## Individual Assessment
 | Matriculation Number | Code Review 1 | Code Review 2 |
 |----------------------|---------------|---------------|
-| 40689622             | 20            |               | 
-| 40803078             | 20            |               |
-| 40742542             | 20            |               |
-| 40797981             | 20            |               |
-| 40791863             | 20            |               |
+| 40689622             | 20            | 20            | 
+| 40803078             | 20            | 20            |
+| 40742542             | 20            | 20            |
+| 40797981             | 20            | 20            |
+| 40791863             | 20            | 20            |
 
 ## Requirements Table
 ### 32 requirements of 32 have been implemented, which is 100%
@@ -68,10 +68,13 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 
 ## Badges
 
-[![LICENSE](https://img.shields.io/github/license/SpicePayne/devops.svg?style=flat-square)](https://github.com/SpicePayne/devops/blob/master/LICENSE)
-[![Releases](https://img.shields.io/github/release/SpicePayne/devops/all.svg?style=flat-square)](https://github.com/SpicePayne/devops/releases)
+[![LICENSE](https://img.shields.io/github/license/SpicePayne/devops.svg?style=flat-square)](https://github.com/SpicePayne/devops-group18/blob/master/LICENSE)
+[![Releases](https://img.shields.io/github/release/SpicePayne/devops-group18/all.svg?style=flat-square)](https://github.com/SpicePayne/devops-group18/releases)
+
+[![CI workflow for Group-18](https://github.com/SpicePayne/devops-group18/actions/workflows/main.yml/badge.svg)](https://github.com/SpicePayne/devops-group18/actions/workflows/main.yml)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/SpicePayne/devops-group18/main.yml?branch=develop&style=flat-square)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
-![Codecov (with branch)](https://img.shields.io/codecov/c/github/SpicePayne/devops-group18/feature-junit)
+![Codecov (with branch)](https://img.shields.io/codecov/c/github/SpicePayne/devops-group18/master)
