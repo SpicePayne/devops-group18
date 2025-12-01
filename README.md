@@ -79,3 +79,23 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
 [![Qodana](https://github.com/SpicePayne/devops-group18/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/SpicePayne/devops-group18/actions/workflows/qodana_code_quality.yml)
+
+##Workflow
+
+1. Identify the user story that will be developed in the next sprint.
+2. Create a new sprint in Zube and assign the selected user story to it.
+3. Move the chosen user story into the Ready column on the Zube board.
+4. Add any additional task cards needed for the user story and order them by priority.
+5. Pull the most recent version of the develop branch.
+6. Create a new feature branch for the selected user story or task.
+7. Select the task to begin working on in Zube and update its status.
+8. Complete the development work for the selected task.
+9. Build the project and generate the JAR file once the feature is complete.
+10. Test and update the Docker configuration using Travis CI to verify everything builds correctly.
+11. Update the feature branch with the latest changes from the develop branch.
+12. Test the updated feature branch to ensure functionality remains intact.
+13. Merge the completed feature branch back into the develop branch.
+14. Repeat steps 5 through 13 until the sprint deliverables are finished.
+15. When the release is ready, merge the develop branch into the release branch and create the release.
+16. Merge the release branch into both the master and develop branches.
+17. Close the sprint after all tasks have been completed and reviewed.
