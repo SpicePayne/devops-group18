@@ -21,11 +21,11 @@ A DevOps-based project developed for SET08803 (Software Engineering Methods).
 ## Individual Assessment
 | Matriculation Number | Code Review 1 | Code Review 2 |
 |----------------------|---------------|---------------|
-| 40689622             | 20            |               | 
-| 40803078             | 20            |               |
-| 40742542             | 20            |               |
-| 40797981             | 20            |               |
-| 40791863             | 20            |               |
+| 40689622             | 20            | 20            | 
+| 40803078             | 20            | 20            |
+| 40742542             | 20            | 20            |
+| 40797981             | 20            | 20            |
+| 40791863             | 20            | 20            |
 
 ## Requirements Table
 ### 32 requirements of 32 have been implemented, which is 100%
