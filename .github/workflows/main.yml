@@ -44,14 +44,12 @@ jobs:
       # 6. Run Integration Tests
       # -----------------------------------------
       #- name: Run Integration Tests
-      # run: mvn -B verify
-										
+      # run: mvn -B verify					
       # -----------------------------------------
       # 7. Generate Coverage Report
       # -----------------------------------------
       #- name: Generate JaCoCo Coverage Report
-      #  run: mvn -q -e jacoco:report
-								   
+      #  run: mvn -q -e jacoco:report						   
       # -----------------------------------------
       # 8. Upload to Codecov
       # -----------------------------------------
@@ -76,8 +74,7 @@ jobs:
           files: ./target/site/jacoco/jacoco.xml  # Specify exact file for reliability
           flags: Unit Tests
           verbose: true
-          fail_ci_if_error: false  # Don't fail the job if Codecov upload fails
-																			   
+          fail_ci_if_error: false  # Don't fail the job if Codecov upload fails																			   
       # -----------------------------------------
       # 9. Integration Tests
       # -----------------------------------------
@@ -110,7 +107,6 @@ jobs:
       - name: Install MySQL client
         run: sudo apt-get install -y mysql-client                     
                                                    
-
       - name: Wait for MySQL to be ready                                                               
         run: |
           echo "Waiting for MySQL..."
@@ -126,18 +122,17 @@ jobs:
       - name: Verify DB connection
         run: |
           mysql -h 127.0.0.1 -u root -pexample -e "SHOW DATABASES;"
-
+		  
       - name: Build and run tests
         env:
           NON_INTERACTIVE: true
         run: mvn -B verify --fail-at-end
-
+		
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
-
   Build:
     name: Build and Start Using docker-compose
     runs-on: ubuntu:latest
