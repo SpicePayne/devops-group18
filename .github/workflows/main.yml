@@ -132,44 +132,29 @@ jobs:
      #     token: ${{ secrets.CODECOV_TOKEN }}
       #    fail_ci_if_error: true
   Build:
-    name: Build and Start Using docker-compose
-    runs-on: ubuntu:latest
+    name: Build Run in Docker and Deploy Release
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
-
-      - name: Set up Java 25
-        uses: actions/setup-java@v5.0.0
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
         with:
-          java-version: '25'
-          distribution: 'corretto'
-
-      - name: Build JAR
-        run: mvn package -DskipTests
-
-      - name: Start Docker Compose (detached)
-        run: docker compose up -d --build # Added --build to ensure latest JAR is used
-
-      - name: Wait for services to be ready  # Added to avoid connection issues
-        run: sleep 10
-
-      - name: Run app for connection test
-        run: docker compose exec -e NON_INTERACTIVE=true app java -jar /tmp/ReportsApp.jar
-
-      - name: View DB logs
-        run: docker compose logs db
-
-      - name: Upload JAR to GitHub Release
-        uses: "marvinpinto/action-automatic-releases@latest"
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Package and Run docker compose
+        run: |
+          mvn package -DskipTests
+          docker compose up --abort-on-container-exit
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
           prerelease: false
+          automatic_release_tag: "latest"
           files: |
-            target/*.jar
-
+            ./target/*.jar
       - name: Stop Docker Compose
         if: always()  # Ensure cleanup even on failure
         run: docker compose down
